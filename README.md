@@ -1,2 +1,3 @@
-# Study_for_FAANG
-Hello ~(-_-)~
+# StudyWithMe
+
+Code will be found in Path: LeetCode
