@@ -1,2 +1,2 @@
-# StudyWithMe_FAANG
+# Study_for_FAANG
 Hello ~(-_-)~
