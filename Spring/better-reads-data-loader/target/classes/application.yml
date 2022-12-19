@@ -1,0 +1,37 @@
+
+
+datadump.location:
+  author: src/main/resources/data_storage/test-authors.txt
+  works:  src/main/resources/data_storage/test-works.txt
+
+spring:
+  #  main:
+  #   allow-circular-references: true
+    data:
+        cassandra:
+          keyspace-name: main
+          username: ZwQJjhquLhtZAtPtrSgLCZqc
+          password: rh4xGvjJFFBi27+kmAc6rKOm3mr.6JR2-DJnRru,LNDglQcoxQfGYwBhL3WldF7Z7HtkanM+n,7e0LLsEoAvJ8+Lhy4TUZ.2mZ20PulDPo4wqs,hQsG.Z6lKbZ,.dk.E
+          schema-action: recreate #CREATE_IF_NOT_EXISTS 
+          request:
+            timeout: 10s         
+          connection:
+            connect-timeout: 10s                                      # it wont drop something that already exists;
+
+datastax.astra:
+    secure-connect-bundle: secure-connect.zip
+
+astra.db:
+    id: 0b0f7510-8f0c-4259-8c7b-9836a1ba4d1b-1
+    region: us-east1
+    keyspace: main
+    application.token: AstraCS:ZwQJjhquLhtZAtPtrSgLCZqc:55dc4056b3b95492cfeac285d842c371a869f21353bea3677fc8385b78fb3fb8
+
+                                        #Client ID
+# ZwQJjhquLhtZAtPtrSgLCZqc
+
+                                        #Client Secret
+# rh4xGvjJFFBi27+kmAc6rKOm3mr.6JR2-DJnRru,LNDglQcoxQfGYwBhL3WldF7Z7HtkanM+n,7e0LLsEoAvJ8+Lhy4TUZ.2mZ20PulDPo4wqs,hQsG.Z6lKbZ,.dk.E
+
+                                        #Token
+# AstraCS:ZwQJjhquLhtZAtPtrSgLCZqc:55dc4056b3b95492cfeac285d842c371a869f21353bea3677fc8385b78fb3fb8
