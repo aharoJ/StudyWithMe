@@ -10,10 +10,10 @@ class Solution:
         for char in t:
             if char in hmap:
                 hmap[char] -=1
-            
-            return False
+            else:
+                return False
 
-        for val in hmap:
+        for val in hmap.values():
             if val !=0:
                 return False
         
