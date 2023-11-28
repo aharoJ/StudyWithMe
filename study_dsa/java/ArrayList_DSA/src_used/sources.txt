@@ -1,9 +1,0 @@
-OPEN SOURCE GIT:
-
-- https://stackoverflow.com/questions/20255911/what-does-the-e-syntax-mean-in-java
-- https://www.geeksforgeeks.org/new-operator-vs-newinstance-method-java/
-- https://www.w3schools.com/java/ref_string_indexof.asp
-- https://www.geeksforgeeks.org/java-string-indexof/
-- https://www.javatpoint.com/java-string-indexof
-- https://careerkarma.com/blog/java-indexof/
-- 
