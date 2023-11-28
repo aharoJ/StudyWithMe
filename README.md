@@ -1,0 +1,3 @@
+# StudyWithMe
+
+A driven and ambitious young computer scientist, I am determined to push the boundaries of what is possible in the field and explore the mysteries of quantum computing and shed light on the fundamental behaviors of our universe. With a keen interest in AI, Hacking, and System Design, I am eager to apply my skills and knowledge to make a lasting impact in the world. Despite my poor upbringing and facing challenges in my early career, I am now focused on reviving my enthusiasm for technology and achieving recognition in the field. In pursuit of mentorships. A pupil can only advance as far as their knowledge permits. "Wisdom is not a product of schooling but of the lifelong attempt to acquire it.” ~ Albert Einstein
