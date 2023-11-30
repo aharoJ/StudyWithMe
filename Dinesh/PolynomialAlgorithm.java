@@ -7,8 +7,8 @@ public class PolynomialAlgorithm {
         // polynomialAlgorithm.printLetter(3);
         // polynomialAlgorithm.printTacos();
         // polynomialAlgorithm.customerWithMostMoney();
-        // polynomialAlgorithm.customerWithMostCASH();
-        polynomialAlgorithm.mostCASH();
+        polynomialAlgorithm.customerWithMostCASH();
+        // polynomialAlgorithm.mostCASH();
 
     }
 
@@ -112,6 +112,8 @@ public class PolynomialAlgorithm {
         System.out.println("Customer with the least money: Customer #" + (customerWithLeastMoney + 1) + " (Amount: " + minSum + ")");
     }
 
+
+
     public void customerWithMostCASH(){
         int[][] data = 
         { 
@@ -119,41 +121,35 @@ public class PolynomialAlgorithm {
             {5, 6, 7},
             {2, 2}
         };
-
-        int mostMula=0;
-        int currentHighest=0;
-
-        for ( int i=0; i< data.length; ++i)
+        // int sum=0; WRONG 
+        int richCustomer=Integer.MIN_VALUE;
+        int brokeCustomer=Integer.MAX_VALUE;
+        for (int i=0; i< data.length; ++i)
         {
-            int customerCash=0;
-            for ( int j=0; j< data[i].length; ++j)
+            int sum=0;
+            for ( int j=0; j < data[i].length; ++j )
             {
-                customerCash+= data[i][j];
-                //System.out.println("Total cash for Customer #" + i + ": " + customerCash);
-
-                currentHighest= customerCash;
-                if (customerCash > currentHighest){
-                    customerCash= currentHighest;
-                }
-
-                if (currentHighest > mostMula){
-                    mostMula= currentHighest;
-                }
-
-
-            }  System.out.println();
-
-
-            // System.out.println(customerCash);
+                sum+= data[i][j];
+                // more descriptive
+                // System.out.println("Customer #" + (i+1) + " has $" + sum);
+            }
             
+            if (sum < brokeCustomer){
+                brokeCustomer = sum;
+            }
 
+            if (sum > richCustomer){
+                richCustomer = sum;
+            }
+            // System.out.println(sum);
 
-   
-            
-        }  System.out.println(mostMula);
-        
-
-
+            // more descriptive
+            // System.out.println("Rich Customer :)" + richCustomer);
+            // System.out.println("Broke Customer :(" + brokeCustomer);
+        }
+    
+        System.out.println(":) Rich Customer -- > " + richCustomer);
+        System.out.println(":( Broke Customer --> " + brokeCustomer);
     }
 
 
