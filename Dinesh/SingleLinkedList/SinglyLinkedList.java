@@ -1,26 +1,60 @@
 package Dinesh.SingleLinkedList;
 
-public class SinglyLinkedList 
-{
-    public ListNode head;
+public class SinglyLinkedList {
+    private ListNode head;
 
+    private static class ListNode {
+        private int data;
+        private ListNode next;
+
+        public ListNode(int data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
 
     public static void main(String[] args) {
-        SinglyLinkedList list= new SinglyLinkedList();
-        list.head = new ListNode(9);
-        ListNode second = new ListNode(2);
-        ListNode third = new ListNode(5);
-        ListNode fourth = new ListNode(22);
+        SinglyLinkedList list = new SinglyLinkedList();
 
-        // now we connct them together to form a chain
-        list.head.next= second; // 9 --> 2
-        second.next= third; // 9 --> 2 --> 5
-        third.next= fourth; // 9 --> 2 --> 5 --> 22 --> null
+        list.insertAtStart(22);
+        list.insertAtStart(5);
+        list.insertAtStart(2);
+        list.insertAtStart(9);
 
+        list.printList();
+        System.out.println("Length: " + list.printLength());
 
-        list.head.printListNode();
-        System.out.println();
-        System.out.println(list.head.lengthListNode());
+        list.insertAtStart(23);
+        list.printList();
+    }
+
+    public void printList() {
+        ListNode current = head;
+        while (current != null) {
+            System.out.print(current.data + "--> ");
+            current = current.next;
+        }
+        System.out.println("null");
+    }
+
+    public int printLength() {
+        int count = 0;
+        ListNode current = head;
+        while (current != null) {
+            count++;
+            current = current.next;
+        }
+        return count;
+    }
+
+    // public void insertAtStart(int value) {
+    //     ListNode newNode = new ListNode(value);
+    //     newNode.next = head;
+    //     head = newNode;
+    // }
+    
+    public void insertAtStart(int value) 
+    {
 
     }
 }

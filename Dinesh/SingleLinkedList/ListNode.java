@@ -34,4 +34,12 @@ public class ListNode
         return count;
     }
 
+    public void insertAtStart(int value){
+        ListNode newNode= new ListNode(value);
+        newNode.next= current;
+        current = current.next;
+
+
+    }
+
 }
