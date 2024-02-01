@@ -4,12 +4,12 @@ public class ListNode
 {
     public int data;
     public ListNode next;
-    public ListNode prev;
+    public ListNode previous;
 
     public ListNode(int data){
         this.data= data;
         this.next= null;
-        this.prev= null;
+        this.previous= null;
     }
     
 }
