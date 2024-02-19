@@ -1,4 +1,4 @@
-package LinkedList.SingleLinkedList;
+package LinkedList.SinglyLinkedList;
 
 public class ListNode{
     public int data;
