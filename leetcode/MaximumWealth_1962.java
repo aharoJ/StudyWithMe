@@ -1,4 +1,4 @@
-package leetcode;
+
 
 public class MaximumWealth_1962 {
     public static void main(String[] args) {

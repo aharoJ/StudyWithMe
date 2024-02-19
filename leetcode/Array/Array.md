@@ -1,4 +1,6 @@
-Certainly! Let's visualize the iterations for the following example:
+
+
+# 189 Rotate Array
 
 Given `nums = [1, 2, 3, 4, 5, 6]` and `k = 2`. The `nums.length` is `6`.
 
@@ -41,3 +43,6 @@ Here's how the auxiliary array `array` would be updated at each iteration:
    - Resulting `array`: `[5, 6, 1, 2, 3, 4]`
 
 After these iterations, the auxiliary `array` now holds the correctly rotated values, and the elements have been shifted `k` positions to the right relative to their original positions in `nums`.
+
+
+# Blah

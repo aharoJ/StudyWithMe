@@ -1,4 +1,4 @@
-package Array.TwoDimensional;
+package PracticeArray.TwoDimensional;
 
 /*
  * The category with the most items in total (sum of all products within a category)

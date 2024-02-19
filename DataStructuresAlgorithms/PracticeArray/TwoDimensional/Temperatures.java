@@ -1,4 +1,4 @@
-package Array.TwoDimensional;
+package PracticeArray.TwoDimensional;
 
 /*
  * Find the Avg. temperature for each day.

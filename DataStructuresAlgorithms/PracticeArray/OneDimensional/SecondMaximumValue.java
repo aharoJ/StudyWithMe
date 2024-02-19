@@ -1,4 +1,4 @@
-package Array.OneDimensional;
+package PracticeArray.OneDimensional;
 
 public class SecondMaximumValue 
 {

@@ -1,4 +1,4 @@
-package Array.TwoDimensional;
+package PracticeArray.TwoDimensional;
 
 
 public class PolynomialAlgorithm 

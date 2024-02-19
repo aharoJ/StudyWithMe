@@ -1,4 +1,4 @@
-package leetcode;
+
 
 public class IsPalindrome_9 {
     public static void main(String[] args) {

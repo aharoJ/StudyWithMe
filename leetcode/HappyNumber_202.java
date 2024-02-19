@@ -1,4 +1,4 @@
-package leetcode;
+
 public class HappyNumber_202 
 {
     public boolean isHappy(int n) 

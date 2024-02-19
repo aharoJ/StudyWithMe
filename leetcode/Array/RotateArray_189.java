@@ -1,4 +1,7 @@
-package leetcode.RotateArray;
+package Array;
+
+
+
 public class RotateArray_189 {
     public void rotate(int[] nums, int k) {
         int[] array= new int[nums.length];
