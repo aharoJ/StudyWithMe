@@ -1,6 +1,7 @@
-package Tree.BinaryTree;
+package Tree_Binary;
 
-public class Searchkey {
+public class BinarySearchTree {
+
     public TreeNode root;
 
     public void insert(int val) {
@@ -37,34 +38,15 @@ public class Searchkey {
         inOrder(root.right);
     }
 
-    public TreeNode searchForKey(TreeNode root, int key) {
-        if (root == null || root.data == key) {
-            return root;
-        }
-
-        if (root.data < key) {
-            return searchForKey(root.right, key);
-        }
-
-        if (root.data < key) {
-            return searchForKey(root.left, key);
-        }
-
-        return null;
-    }
-
     public static void main(String[] args) {
-        Searchkey tree = new Searchkey();
+        BinarySearchTree tree = new BinarySearchTree();
         tree.insert(3);
         tree.insert(1);
         tree.insert(9);
         tree.insert(6);
+        tree.insert(2);
 
-        TreeNode check = tree.searchForKey(tree.root, 9);
-        if (check != null) {
-            System.out.print("Found: " + check.data);
-        } else {
-            System.out.print("NOT FOUND");
-        }
+        tree.inOrder();
+
     }
 }

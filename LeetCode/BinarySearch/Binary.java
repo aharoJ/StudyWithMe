@@ -1,7 +1,4 @@
 
-
-
-
 public class Binary {
     public static void name() {
         int[] nums1 = { 1, 3, 5, 6 };

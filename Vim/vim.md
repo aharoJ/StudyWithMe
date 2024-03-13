@@ -119,7 +119,7 @@
 	- replace
 
 
-# Visual Mode
+## Visual Mode
 - `V`
 	- Takes the **whole** line.
 - v 
@@ -179,19 +179,6 @@
   - new line **above**
 
 
-- `/` + `[char]`
-  - **forward** highlights search
-- `/` + `[char]` + `[enter]` + `n`
-  - next.next.next
-
-- `?` + `[char]`
-  - **backward** highlights search
-- `/` + `[char]` + `[enter]` + `n` <-- still remains n
-  - prev.prev.prev
-
-
-
-
 
 sample
 - `dt(` 
@@ -205,8 +192,56 @@ sample
   - `f{` 
     - `p` 
 
-- `` 
-  - 
+
+## Episode 3
+- `/` + `[char]`
+  - **forward** highlights search
+- `/` + `[char]` + `[enter]` + `n`
+  - next.next.next
+
+- `?` + `[char]`
+  - **backward** highlights search
+- `/` + `[char]` + `[enter]` + `n` <-- still remains n
+  - prev.prev.prev
+
+- `*` 
+  - instant highlights all words 
+
+
+
+## Episode 4
+- `c` 
+  - cuts and jumps into **Insert Mode**
+
+- `v` + `i` + `(` 
+  - selectects everything inside the **parenthesis** exclusive
+
+- `v` + `i` + `{` 
+  - selectects everything inside the **brackets** exclusive
+
+- `v` + `a` + `(` 
+  - selectects everything inside the **parenthesis** inclusive
+
+- `v` + `a` + `{` 
+  - selectects everything inside the **brackets** inclusive
+
+
+- `c` + `i` + `(` 
+  - cuts everything inside the **parenthesis** exclusive
+
+- `c` + `i` + `{` 
+  - cuts everything inside the **brackets** exclusive
+
+- `c` + `a` + `(` 
+  - cuts everything inside the **parenthesis** inclusive
+
+- `c` + `a` + `{` 
+  - cuts everything inside the **brackets** inclusive
+
+- `[space]` + `p`
+	- paste but does not overwrite buffer and keeps copied stuff
+
+
 
 - `` 
   - 
@@ -220,9 +255,28 @@ sample
 - `` 
   - 
 
-- `` 
-  - 
+
+
+# Insert Mode
+- `crl` + `t' 
+  - indent 
+- `crl` + `d' 
+  - de-indent 
 
 - `` 
   - 
 
+- `` 
+  - 
+
+
+Windows
+key	description	mode
+<C-h>	go to left window	normal
+<C-j>	go to lower window	normal
+<C-k>	go to upper window	normal
+<C-l>	go to right window	normal
+<C-Up>	decrease window height	normal
+<C-Down>	increase window height	normal
+<C-Left>	decrease window width	normal
+<C-Right>	increase window width	normal

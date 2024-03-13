@@ -1,4 +1,4 @@
-package Tree.NormalTree;
+package Tree_Normal;
 
 public class TreeNode 
 {

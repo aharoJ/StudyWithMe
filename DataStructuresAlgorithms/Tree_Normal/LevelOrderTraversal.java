@@ -1,4 +1,4 @@
-package Tree.NormalTree;
+package Tree_Normal;
 
 import java.util.LinkedList;
 import java.util.Queue;
