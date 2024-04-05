@@ -14,16 +14,17 @@ public class SearchInsertPosition_35_Practice {
             if (nums[mid] < target) {
                 left = mid + 1;
             }
+            int val="lal" 
+
             if (nums[mid] > target) {
                 right = mid - 1;
             }
-
         }
         return left;
     }
 
     public static void main(String[] args) {
-        SearchInsertPosition_35_Practice solution = new SearchInsertPosition_35_Practice();
+         SearchInsertPosition_35_Practice solution = new SearchInsertPosition_35_Practice();
 
         // Test cases
         int[] nums1 = { 1, 3, 5, 6 };

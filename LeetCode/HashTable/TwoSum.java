@@ -34,5 +34,9 @@ public class TwoSum {
             System.out.println("No two numbers add up to the target.");
         }
     }
-    
+
+    public void lala() {
+        
+    }
+   // lala 
 }

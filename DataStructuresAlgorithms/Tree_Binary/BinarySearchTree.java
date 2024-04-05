@@ -14,11 +14,11 @@ public class BinarySearchTree {
             return root;
         }
 
-        if (val < root.data) {
+        if (val < root.val) {
             root.left = insert(root.left, val);
         }
 
-        if (val > root.data) {
+        if (val > root.val) {
             root.right = insert(root.right, val);
         }
 
@@ -34,7 +34,7 @@ public class BinarySearchTree {
             return;
         }
         inOrder(root.left);
-        System.out.print(root.data + " ");
+        System.out.print(root.val + " ");
         inOrder(root.right);
     }
 

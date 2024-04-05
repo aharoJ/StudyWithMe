@@ -13,11 +13,11 @@ public class Searchkey {
             return root;
         }
 
-        if (val < root.data) {
+        if (val < root.val) {
             root.left = insert(root.left, val);
         }
 
-        if (val > root.data) {
+        if (val > root.val) {
             root.right = insert(root.right, val);
         }
 
@@ -33,20 +33,20 @@ public class Searchkey {
             return;
         }
         inOrder(root.left);
-        System.out.print(root.data + " ");
+        System.out.print(root.val + " ");
         inOrder(root.right);
     }
 
     public TreeNode searchForKey(TreeNode root, int key) {
-        if (root == null || root.data == key) {
+        if (root == null || root.val == key) {
             return root;
         }
 
-        if (root.data < key) {
+        if (root.val < key) {
             return searchForKey(root.right, key);
         }
 
-        if (root.data < key) {
+        if (root.val < key) {
             return searchForKey(root.left, key);
         }
 
@@ -62,7 +62,7 @@ public class Searchkey {
 
         TreeNode check = tree.searchForKey(tree.root, 9);
         if (check != null) {
-            System.out.print("Found: " + check.data);
+            System.out.print("Found: " + check.val);
         } else {
             System.out.print("NOT FOUND");
         }
