@@ -1,5 +1,6 @@
-import leetcode.tw
+package leetcode.twopointer;
 
+import java.util.ArrayList;
 
 /**
  * Example 1:
@@ -11,26 +12,15 @@ import leetcode.tw
  * Output: 5, nums = [0,1,2,3,4,_,_,_,_,_]
  * two pointers approach
  */
+
 public class RemoveDuplicatesSortedArray_26 {
-  // public int removeDuplicates(int[] nums) {
-  // int i = 0;
-  // for (int j = 1; j < nums.length; j++) {
-  // if (nums[j] != nums[i]) {
-  // i++;
-  // nums[i] = nums[j];
-  // }
-  // }
-  // return i + 1;
-  //
-  // }
   public int removeDuplicates(int[] nums) {
-    int insert = 1;
+    int uniqueIndex = 1;
     for (int i = 1; i < nums.length; i++) {
       if (nums[i] != nums[i - 1]) {
-        nums[insert] = nums[i];
-        insert++;
+        nums[uniqueIndex++] = nums[i];
       }
     }
-    return insert;
+    return uniqueIndex;
   }
 }
