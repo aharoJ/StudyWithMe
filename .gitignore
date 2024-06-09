@@ -1,11 +1,6 @@
 # Compiled class file
 *.class
 
-###
-**temp/
-**00/
-Dinesh/
-
 # Log file
 *.log
 
@@ -27,7 +22,10 @@ Dinesh/
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
-
+###
+**temp/
+**00/
+Dinesh/
 .DS_Store
 .vscode/
 youtube/
@@ -36,3 +34,5 @@ dev/
 00/
 temp*
 notes*
+rust/zerotomastery
+leetcode/tiktok
