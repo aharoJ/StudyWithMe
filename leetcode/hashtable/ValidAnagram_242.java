@@ -1,3 +1,5 @@
+package hashtable;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -12,27 +14,29 @@ import java.util.Set;
  * Input: s = "rat", t = "car"
  * Output: false
  */
+@SuppressWarnings("unused") // Nvim
 public class ValidAnagram_242 {
   public boolean isAnagram(String s, String t) {
-    if (s.length() != t.length()) {
-      return false;
-    }
     Map<Character, Integer> map = new HashMap<>();
-    for (Character string : s.toCharArray()) {
-      int freq = map.getOrDefault(string, 0);
-      map.put(string, freq + 1);
+    for (char character : s.toCharArray()) {
+      int freq = map.getOrDefault(character, 0);
+      map.put(character, freq + 1);
     }
 
-    for (Character string : t.toCharArray()) {
-      if (!map.containsKey(string)) {
+    for (char character : t.toCharArray()) {
+      int freq = map.getOrDefault(character, 0);
+      map.put(character, freq - 1);
+
+      if (!map.containsKey(character)) {
         return false;
       }
-      int freq = map.getOrDefault(string, 0);
-      map.put(string, freq - 1);
-      if (map.get(string) == 0) {
-        map.remove(string);
+    }
+
+    for (int keys : map.values()) {
+      if (keys != 0) {
+        return false;
       }
     }
-    return map.isEmpty();
+    return true;
   }
 }
