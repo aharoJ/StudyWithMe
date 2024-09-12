@@ -51,7 +51,7 @@ public class LL {
     }
 
     Node temp = head;
-    for (int i = 0; i < index-1; ++i) {
+    for (int i = 0; i < index - 1; ++i) {
       temp = temp.next; // Traverse to the node just before the insertion point
     }
     Node node = new Node(val, temp.next); // Insert new node
@@ -59,6 +59,72 @@ public class LL {
     size++;
   }
 
+  public int deleteFirst() {
+    int val = head.value;
+    head = head.next;
+    if (head == null) {
+      tail = null;
+    }
+    size--;
+    return val;
+  }
+
+  public Node get(int index) {
+    if (head == null) {
+      return null;
+    }
+    Node node = head;
+    for (int i = 0; i < index; ++i) {
+      node = node.next;
+    }
+    return node;
+  }
+
+  public int deleteLast() {
+    if (size <= 1) {
+      return deleteFirst();
+    }
+    Node secondLast = get(size - 2);
+    int val = tail.value; // Get the value of the tail before deletion
+    tail = secondLast; // Update tail to second last
+    tail.next = null; // Remove the last node by setting next to null
+    size--;
+
+    return val;
+  }
+
+  public int delete(int index) {
+    if (index == 0) {
+      return deleteFirst();
+    }
+    if (index == size - 1) {
+      return deleteLast();
+    }
+
+    Node prev = get(index - 1); // Get the node before the one to be deleted
+    int val = prev.next.value; // Get the value of the node to be deleted
+
+    prev.next = prev.next.next; // Skip the node being deleted
+
+    size--;
+    return val;
+  }
+
+  public Node findVal(int val) {
+    if (head == null) {
+      return null;
+    }
+    Node node = head;
+    while (node != null) {
+      if (node.value == val) {
+        return node;
+      }
+      node = node.next;
+    }
+    return null;
+  }
+
+  // ------------------------------------------------------------------------------------------------------
   // Private Node class
   private class Node {
     private int value;
