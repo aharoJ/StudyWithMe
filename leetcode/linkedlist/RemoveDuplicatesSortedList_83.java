@@ -1,20 +1,22 @@
+package linkedlist;
 
+/**
+ * Input: head = [1,1,2,3,3]
+ * Output: [1,2,3]
+ */
 public class RemoveDuplicatesSortedList_83 {
-
   public ListNode deleteDuplicates(ListNode head) {
-    if (head==null){
-      return null;
+    if (head == null) {
+      return head;
     }
-
-    ListNode current=head;
-    while(current.next!=null){
-      if (current.val==current.next.val){
-        current.next= current.next.next;
-      }else{
-          current=current.next;
-        }
+    ListNode node = head;
+    while (node.next != null) {
+      if (node.val == node.next.val) {
+        node.next = node.next.next;
+      } else {
+        node = node.next;
+      }
     }
     return head;
   }
-
 }
