@@ -11,6 +11,9 @@ public class ListNode {
   public int val;
   public ListNode next;
 
+  // Head of the linked list (added this line to store reference to head)
+  public ListNode head;
+
   // Default constructor
   public ListNode() {
   }
@@ -25,4 +28,32 @@ public class ListNode {
     this.val = val;
     this.next = next;
   }
+
+  // Insert last method with correct logic
+  public void insertLast(int val) {
+    ListNode node = new ListNode(val); // Create a new node with the value
+    if (head == null) {
+      head = node; // If the list is empty, set the new node as the head
+      return; // Exit the method
+    }
+
+    ListNode current = head;
+    // Traverse to the last node
+    while (current.next != null) {
+      current = current.next;
+    }
+
+    // Insert the new node at the end
+    current.next = node;
+  }
+
+  public void printList(ListNode head) {
+    ListNode current = head;
+    while (current != null) {
+      System.out.print(current.val + " ");
+      current = current.next;
+    }
+    System.out.println();
+  }
+
 }
