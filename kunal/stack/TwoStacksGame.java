@@ -1,0 +1,46 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+/**
+ * TwoStacksGame
+ */
+public class TwoStacksGame {
+  public static void main(String[] args) {
+    @SuppressWarnings("resource")
+    Scanner s = new Scanner(System.in);
+    int t = s.nextInt();
+    for (int i = 0; i < t; i++) {
+      int n = s.nextInt();
+      int m = s.nextInt();
+      int x = s.nextInt();
+      int[] a = new int[n];
+      int[] b = new int[m];
+      for (int j = 0; j < n; j++) {
+        a[j] = s.nextInt();
+      }
+      for (int j = 0; j < m; j++) {
+        b[j] = s.nextInt();
+      }
+      System.out.println(twoStacks(x, a, b));
+    }
+  }
+
+  static int twoStacks(int x, int[] a, int[] b) {
+    return helper(x, a, b, 0, 0) - 1;
+  }
+
+  private static int helper(int x, int[] a, int[] b, int sum, int counter) {
+    if (sum > x) {
+      return counter;
+    }
+
+    if (a.length == 0 || b.length == 0) {
+      return counter;
+    }
+
+    int ans1 = helper(x, Arrays.copyOfRange(a, 1, a.length), b, sum + a[0], counter + 1);
+    int ans2 = helper(x, a, Arrays.copyOfRange(b, 1, b.length), sum + b[0], counter + 1);
+
+    return Math.max(ans1, ans2);
+  }
+}
