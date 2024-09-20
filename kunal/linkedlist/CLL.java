@@ -6,6 +6,7 @@ package linkedlist;
 public class CLL {
   private Node head;
   private Node tail;
+  @SuppressWarnings("unused")
   private int size;
 
   public void inset(int val) {
@@ -62,6 +63,7 @@ public class CLL {
       this.value = value;
     }
 
+    @SuppressWarnings("unused")
     public Node(int value, Node next) {
       this.value = value;
       this.next = next;

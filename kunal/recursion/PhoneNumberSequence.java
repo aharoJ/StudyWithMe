@@ -7,7 +7,7 @@ import java.util.List;
  */
 public class PhoneNumberSequence {
   public static void main(String[] args) {
-    List<String> result = letterCombination("23");
+    List<String> result = letterCombination("");
     System.out.println(result);
   }
 
@@ -48,7 +48,6 @@ public class PhoneNumberSequence {
       char letter = letters.charAt(i);
       result.addAll(helper(digits.substring(1), processed + letter, map));
     }
-
     return result;
   }
 

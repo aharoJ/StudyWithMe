@@ -1,14 +1,22 @@
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * SubSequence
  */
 public class SubSequence {
   public static void main(String[] args) {
     // Call the function with an example input string "abc"
-    System.out.println("------------------substring---------------------------");
-    subsequence("abc", "");
-
-    System.out.println("-------------------index--------------------------");
-    subsequenceWithIndex("abc", "", 0);
+    // System.out.println("------------------substring---------------------------");
+    // subsequence("abc", "");
+    
+    // System.out.println("-------------------index--------------------------");
+    // subsequenceWithIndex("abc", "", 0);
+    
+    // ArrayList<String> result = subsequenceListWithIndex("abc", "", 0);
+    // System.out.println(result); // Print all subsequences
+    
+    subsequenceASCII("abc", "", 0);
 
     System.out.println("---------------------------------------------");
   }
@@ -47,4 +55,31 @@ public class SubSequence {
     // Option 2: Exclude the current character
     subsequenceWithIndex(unprocessed, processed, index + 1);
   }
+
+  static ArrayList<String> subsequenceListWithIndex(String unprocessed, String processed, int index) {
+    ArrayList<String> result = new ArrayList<>();
+    if (index == unprocessed.length()) {
+      result.add(processed);
+      return result;
+    }
+
+    char current_char = unprocessed.charAt(index);
+    result.addAll(subsequenceListWithIndex(unprocessed, processed + current_char, index + 1));
+    result.addAll(subsequenceListWithIndex(unprocessed, processed, index + 1));
+
+    return result;
+  }
+
+  static void subsequenceASCII(String unprocessed, String processed, int index) {
+    if (index == unprocessed.length()) {
+      System.out.println(processed);
+      return;
+    }
+
+    char current_char = unprocessed.charAt(index);
+    subsequenceASCII(unprocessed, processed + current_char, index + 1);
+    subsequenceASCII(unprocessed, processed, index + 1);
+    subsequenceASCII(unprocessed, processed + (int) current_char, index + 1);
+  }
+
 }
