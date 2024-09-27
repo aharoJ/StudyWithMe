@@ -1,6 +1,5 @@
 package heap;
 
-import java.util.Collections;
 import java.util.PriorityQueue;
 
 /**
@@ -8,29 +7,23 @@ import java.util.PriorityQueue;
  */
 public class KthLargestElementArray_215 {
   public int findKthLargest(int[] nums, int k) {
-    PriorityQueue<Integer> minheap = new PriorityQueue<>();
-    for (int vals : nums) {
-      minheap.offer(vals);
-
-      if (minheap.size() > k) {
-        minheap.poll();
-      }
-    }
-    return minheap.peek();
+    return -1;
+    // SELECT ONE OF THE METHODS BELOW
   }
 
   // -----------------------------------------------------------------------------------------------
   public int maxHeap(int[] nums, int k) {
-    PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
+    PriorityQueue<Integer> maxheap = new PriorityQueue<>(
+        (a, b) -> b - a);
     for (int num : nums) {
-      maxHeap.offer(num);
+      maxheap.offer(num);
     }
 
     // Remove the top k-1 elements to get to the kth largest element
     for (int i = 0; i < k - 1; i++) {
-      maxHeap.poll();
+      maxheap.poll();
     }
-    return maxHeap.peek();
+    return maxheap.peek();
   }
 
   // -----------------------------------------------------------------------------------------------
