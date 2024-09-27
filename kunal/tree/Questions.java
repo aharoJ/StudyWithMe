@@ -61,6 +61,50 @@ public class Questions {
     return queue.peek();
   }
 
+  public void flatten(TreeNode root) {
+    if (root == null) {
+      return;
+    }
+
+    TreeNode node = root;
+    while (node != null) {
+      if (node.left != null) {
+        TreeNode rightmost = node.left;
+        while (rightmost.right != null) {
+          rightmost = rightmost.right;
+        }
+        rightmost.right = node.right;
+        node.right = node.left;
+        node.left = null;
+      }
+      node = node.right;
+    }
+  }
+
+  boolean existPathUtil(TreeNode node, int[] arr) {
+    if (node == null) {
+      return arr.length == 0;
+    }
+    return existPathUtil(node, arr, 0);
+  }
+
+  private boolean existPathUtil(TreeNode node, int[] arr, int index) {
+    if (node == null) {
+      return false;
+    }
+
+    if (index >= arr.length || node.val != arr[index]) {
+      return false;
+    }
+
+    if (node.left == null && node.right == null && index == arr.length - 1) {
+      return true;
+    }
+
+    return existPathUtil(node.left, arr, index + 1) || existPathUtil(node.right, arr, index + 1);
+
+  }
+
   private class TreeNode {
     private int val;
     private int height;
