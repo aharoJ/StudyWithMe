@@ -1,7 +1,5 @@
 package linkedlist;
 
-import youtube.SingleLink.ListNode;
-
 /**
  * Input: list1 = [1,2,4], list2 = [1,3,4]
  * Output: [1,1,2,3,4,4]
@@ -22,9 +20,11 @@ class Solution {
     }
 
     if (list1.val < list2.val) {
+      // do this
       list1.next = mergeTwoLists(list1.next, list2);
       return list1;
-    } else if (list2.val < list1.val) {
+    } else {
+      // list2 is smaller
       list2.next = mergeTwoLists(list1, list2.next);
       return list2;
     }
