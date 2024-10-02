@@ -4,33 +4,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Permutations_46
+ * Input: nums = [1,2,3]
+ * Output: [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
+ *
+ * Input: nums = [0,1]
+ * Output: [[0,1],[1,0]]
  */
-public class Permutations_46 {
+class Solution {
   public List<List<Integer>> permute(int[] nums) {
-    boolean[] visisted = new boolean[nums.length];
-    List<Integer> process = new ArrayList<>();
-    return helper(nums, process, visisted);
+    List<List<Integer>> result = new ArrayList<>();
+    List<Integer> inner = new ArrayList<>();
+    helper(nums, result, inner);
+    return result;
   }
 
-  static List<List<Integer>> helper(int[] nums, List<Integer> process, boolean[] visisted) {
-    List<List<Integer>> result = new ArrayList<>();
-    if (nums.length == process.size()) {
-      result.add(new ArrayList<>(process));
-      return result;
+  private void helper(int[] nums, List<List<Integer>> result, List<Integer> inner) {
+    if (inner.size() == nums.length) {
+      result.add(new ArrayList<>(inner));
+      return;
     }
+
     for (int i = 0; i < nums.length; ++i) {
-      if (!visisted[i]) {
-        visisted[i] = true;
-        process.add(nums[i]);
-
-        result.addAll(helper(nums, process, visisted));
-
-        // backtrack
-        visisted[i] = false;
-        process.removeLast();
+      if (!inner.contains(nums[i])) {
+        inner.add(nums[i]);
+        helper(nums, result, inner);
+        inner.remove(inner.size() - 1);
       }
     }
-    return result;
   }
 }
