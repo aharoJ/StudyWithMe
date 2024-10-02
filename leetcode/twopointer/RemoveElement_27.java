@@ -1,4 +1,4 @@
-package leetcode.twopointer;
+package twopointer;
 
 /**
  * Example 1:
