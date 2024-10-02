@@ -1,8 +1,6 @@
 package intervals;
 
 /**
- */
-/**
  * TwoEventsHaveConflict_2446
  */
 public class TwoEventsHaveConflict_2446 {
