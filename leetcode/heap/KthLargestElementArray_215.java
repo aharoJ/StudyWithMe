@@ -28,7 +28,8 @@ public class KthLargestElementArray_215 {
 
   // -----------------------------------------------------------------------------------------------
   public int minHeap(int[] nums, int k) {
-    PriorityQueue<Integer> minheap = new PriorityQueue<>();
+    PriorityQueue<Integer> minheap = new PriorityQueue<>(
+        (a, b) -> a - b);
 
     for (int vals : nums) {
       minheap.offer(vals);

@@ -3,7 +3,9 @@ package heap;
 import java.util.PriorityQueue;
 
 /**
- * MUST DO ASAPPP
+ * If the max-heap has more elements, the median is the root of the max-heap.
+ * If both heaps are balanced, the median is the average of the roots of the two
+ * heaps.*
  */
 public class FindMedianDataStream_295 {
   private PriorityQueue<Integer> minheap;
