@@ -1,5 +1,8 @@
 package hashtable;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Input: nums = [1,2,3,1]
  * Output: true

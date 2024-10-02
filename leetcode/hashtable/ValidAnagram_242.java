@@ -17,26 +17,29 @@ import java.util.Set;
 @SuppressWarnings("unused") // Nvim
 public class ValidAnagram_242 {
   public boolean isAnagram(String s, String t) {
-    Map<Character, Integer> map = new HashMap<>();
-    for (char character : s.toCharArray()) {
-      int freq = map.getOrDefault(character, 0);
-      map.put(character, freq + 1);
+    if (s.length() != t.length()) {
+      return false;
     }
 
-    for (char character : t.toCharArray()) {
-      int freq = map.getOrDefault(character, 0);
-      map.put(character, freq - 1);
+    Map<Character, Integer> map = new HashMap<>();
+    for (char ch : s.toCharArray()) {
+      int freq = map.getOrDefault(ch, 0);
+      map.put(ch, freq + 1);
+    }
 
-      if (!map.containsKey(character)) {
-        return false;
+    for (char ch : t.toCharArray()) {
+      if (map.containsKey(ch)) {
+        int freq = map.getOrDefault(ch, 0);
+        map.put(ch, freq - 1);
       }
     }
 
-    for (int keys : map.values()) {
-      if (keys != 0) {
+    for (char key : map.keySet()) {
+      if (map.get(key) != 0) {
         return false;
       }
     }
     return true;
+
   }
 }
