@@ -4,7 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * IntervalListIntersections_968
+ * Input:
+ * firstList = [[0,2],[5,10],[13,23],[24,25]]
+ * secondList = [[1,5],[8,12],[15,24],[25,26]]
+ * Output: [[1,2],[5,5],[8,10],[15,23],[24,24],[25,25]]
+ * 
+ * Input: firstList = [[1,3],[5,9]], secondList = []
+ * Output: []
  */
 class IntervalListIntersectios_968 {
   public int[][] intervalIntersection(int[][] firstList, int[][] secondList) {
@@ -17,9 +23,9 @@ class IntervalListIntersectios_968 {
       int startB = secondList[j][0];
       int endB = secondList[j][1];
 
-      int startOverlap = Math.max(startA, startB);
-      int endOverlap = Math.min(endA, endB);
-      if (startOverlap <= endOverlap) {
+      if (startA <= endB && startB <= endA) {
+        int startOverlap = Math.max(startA, startB);
+        int endOverlap = Math.min(endA, endB);
         result.add(new int[] { startOverlap, endOverlap });
       }
 
