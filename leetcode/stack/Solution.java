@@ -1,33 +1,32 @@
 package stack;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
 /**
- * Solution
  */
 @SuppressWarnings("unused") // nvim
 class Solution {
-  public int[] smallerNumbersThanCurrent(int[] nums) {
-    int[] result = new int[nums.length];
-    return helper(nums, result, 0, 0, 0);
-  }
-
-  static int[] helper(int[] nums, int[] result, int i, int j, int count) {
-    // Base case: when i reaches the end of the array, return the result array
-    if (i == nums.length) {
-      return result;
+  public int minSwaps(String s) {
+    Stack<Character> stack = new Stack<>();
+    int unbalanced = 0;
+    for (char ch : s.toCharArray()) {
+      // If an opening bracket is encountered, push it in the stack.
+      if (ch == '[') {
+        stack.push(ch);
+      } else {
+        // If the stack is not empty, pop it.
+        if (!stack.isEmpty()) {
+          stack.pop();
+        } else {
+          // Otherwise increase the count of unbalanced brackets.
+          unbalanced++;
+        }
+      }
     }
-
-    // Base case: when j has compared all elements with nums[i]
-    if (j == nums.length) {
-      result[i] = count;
-      return helper(nums, result, i + 1, 0, 0); // Move to the next element (i + 1) and reset j and count
-    }
-    if (nums[i] > nums[j]) {
-      count++;
-    }
-    return helper(nums, result, i, j + 1, count);
+    return (unbalanced + 1) / 2;
   }
 }

@@ -1,23 +1,38 @@
 package stack;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Stack;
+
 /**
- * ValidParentheses_20
+ * Input: s = "()"
+ * Output: true
+ * 
+ * Input: s = "()[]{}"
+ * Output: true
  */
-public class ValidParentheses_20 {
+class Solution {
   public boolean isValid(String s) {
-    Deque<Character> stack = new ArrayDeque<>(10000);
-    for (char c : s.toCharArray()) {
-      if (c == '[' || c == '(' || c == '{') {
-        stack.push(c);
-      } else if (stack.isEmpty() || !match(stack.pop(), c)) {
-        return false;
+    Map<Character, Character> map = mymap();
+    Stack<Character> stack = new Stack<>();
+
+    for (char ch : s.toCharArray()) {
+      if (map.containsKey(ch)) { // Opening bracket
+        stack.push(ch);
+      } else { // Closing bracket
+        if (stack.isEmpty() || map.get(stack.pop()) != ch) {
+          return false;
+        }
       }
     }
-
     return stack.isEmpty();
   }
 
-  private boolean match(char l, char r) {
-    return (l == '(' && r == ')') || (l == '{' && r == '}') || (l == '[' && r == ']');
+  Map<Character, Character> mymap() {
+    Map<Character, Character> map = new HashMap<>();
+    map.put('(', ')');
+    map.put('{', '}');
+    map.put('[', ']');
+    return map;
   }
 }
