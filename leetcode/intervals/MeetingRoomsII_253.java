@@ -16,19 +16,15 @@ public class MeetingRoomsII_253 {
     Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
     Queue<Integer> minheap = new PriorityQueue<>(
         (a, b) -> a - b);
-    minheap.offer(intervals[0][1]); // offer 1st interval
-    for (int i = 0; i < intervals.length - 1; ++i) {
-      int startA = intervals[i][0];
-      int endA = intervals[i][1];
-
-      int startB = intervals[i + 1][0];
-      int endB = intervals[i + 1][1];
-
-      if (startB >= minheap.peek()) {
+    int currentTail = intervals[0][1];
+    minheap.offer(currentTail);
+    for (int i = 1; i < intervals.length; ++i) {
+      int nextHead = intervals[i][0];
+      int nextTail = intervals[i][1];
+      if (!minheap.isEmpty() && minheap.peek() <= nextHead) {
         minheap.poll();
       }
-
-      minheap.offer(endB);
+      minheap.offer(nextTail);
     }
     return minheap.size();
   }
