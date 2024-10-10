@@ -5,30 +5,30 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Input: arr = [1,2,2,1,1,3]
+ * Output: true
+ * 
+ * 
+ * Input: arr = [1,2]
+ * Output: false
+ */
 public class UniqueNumberOccurrences_1207 {
-
-  public boolean uniqueOccurrences(int[] nums) {
+  public boolean uniqueOccurrences(int[] arr) {
     Map<Integer, Integer> map = new HashMap<>();
-    for (int val : nums) {
-      int freq = map.getOrDefault(val, 0);
-      map.put(val, freq + 1);
+    for (int num : arr) {
+      int freq = map.getOrDefault(num, 0);
+      map.put(num, freq + 1);
     }
 
     Set<Integer> set = new HashSet<>();
-    for (int freq : map.values()) {
-      if (!set.contains(freq)) {
-        set.add(freq);
+    for (int values : map.values()) {
+      if (!set.contains(values)) {
+        set.add(values);
       } else {
         return false;
       }
     }
     return true;
-  }
-
-  public static void main(String[] args) {
-    int[] arr = { 1, 2, 2, 1, 1, 3 };
-    UniqueNumberOccurrences_1207 solution = new UniqueNumberOccurrences_1207();
-    boolean result = solution.uniqueOccurrences(arr);
-    System.out.println("Does each number have a unique number of occurrences? " + result);
   }
 }

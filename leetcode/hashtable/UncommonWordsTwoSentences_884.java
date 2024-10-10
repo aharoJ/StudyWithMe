@@ -1,23 +1,16 @@
 package hashtable;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.PriorityQueue;
-import java.util.Queue;
-import java.util.Set;
-import java.util.Stack;
 
 /**
+ * UncommonWordsTwoSentences_884
  */
-@SuppressWarnings("unused") // Nvim
-class Solution {
+public class UncommonWordsTwoSentences_884 {
   public String[] uncommonFromSentences(String A, String B) {
-    Map<String, Integer> map = new HashMap();
+    Map<String, Integer> map = new HashMap<>();
     for (String word : A.split(" ")) {
       map.put(word, map.getOrDefault(word, 0) + 1);
     }

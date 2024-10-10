@@ -22,7 +22,7 @@ public class IsomorphicStrings_205 {
       string.append(Integer.toString(map.get(charS)));
       string.append(" ");
     }
-    return string.toString()
+    return string.toString();
   }
 
   public boolean isIsomorphic(String s, String t) {
