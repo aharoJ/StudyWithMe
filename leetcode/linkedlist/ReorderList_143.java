@@ -1,52 +1,62 @@
 package linkedlist;
 
 /**
- * ReorderList_143
+ * Input: head = [1,2,3,4]
+ * Output: [1,4,2,3]
+ * 
+ * Input: head = [1,2,3,4,5]
+ * Output: [1,5,2,4,3]
  */
 public class ReorderList_143 {
-  private ListNode reverseList(ListNode head) {
-    ListNode prev = null;
-    while (head != null) {
-      ListNode next = head.next;
-      head.next = prev;
-      prev = head;
-      head = next;
-    }
-    return prev;
-  }
+  class Solution {
+    public void reorderList(ListNode head) {
+      if (head == null || head.next == null) {
+        return;
+      }
+      ListNode mid = getMiddle(head);
 
-  private ListNode middleNode(ListNode head) {
-    ListNode slow = head;
-    ListNode fast = head;
-    while (fast != null && fast.next != null) {
-      slow = slow.next;
-      fast = fast.next.next;
-    }
-    return slow;
-  }
+      ListNode secondHalf = reverse(mid.next);
+      mid.next = null; // Break the list into two halves
 
-  public void reorderList(ListNode head) {
-    if (head == null || head.next == null) {
-      return;
-    }
-    ListNode mid = middleNode(head);
-    ListNode head_second = reverseList(mid);
-    ListNode head_first = head;
+      mergeAlternate(head, secondHalf);
 
-    // rearrange
-    while (head_first != null && head_second != null) {
-      ListNode temp = head_first.next;
-      head_first.next = head_second;
-      head_first = temp;
-
-      temp = head_second.next;
-      head_second.next = head_first;
-      head_second = temp;
     }
 
-    // next of tail to null
-    if (head_first != null) {
-      head_first.next = null;
+    private ListNode getMiddle(ListNode node) {
+      ListNode slow = node;
+      ListNode fast = node.next;
+      while (fast != null && fast.next != null) {
+        slow = slow.next;
+        fast = fast.next.next;
+      }
+      return slow;
+    }
+
+    private ListNode reverse(ListNode node) {
+      ListNode prev = null;
+      while (node != null) {
+        ListNode temp = node.next;
+        node.next = prev;
+        prev = node;
+        node = temp;
+      }
+      return prev;
+    }
+
+    private void mergeAlternate(ListNode list1, ListNode list2) {
+      if (list1 == null || list2 == null) {
+        return;
+      }
+
+      while (list1 != null && list2 != null) {
+        ListNode temp = list1.next;
+        list1.next = list2; // Point list1 to list2
+        list1 = temp; // Move to the next node in list1
+
+        temp = list2.next;
+        list2.next = list1; // Point list2 to list1
+        list2 = temp; // Move to the next node in list2
+      }
     }
   }
 }
