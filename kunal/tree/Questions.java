@@ -102,7 +102,9 @@ public class Questions {
     }
 
     return existPathUtil(node.left, arr, index + 1) || existPathUtil(node.right, arr, index + 1);
+  }
 
+  public TreeNode buildTree(int[] preorder, int[] inorder) {
   }
 
   private class TreeNode {

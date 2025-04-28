@@ -1,7 +1,7 @@
 import java.util.Arrays;
 
 /**
- *  BubbleSort 
+ * BubbleSort
  */
 public class BubbleSort {
   public static void main(String[] args) {
