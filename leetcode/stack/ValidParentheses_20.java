@@ -1,4 +1,3 @@
-package stack;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,8 +10,33 @@ import java.util.Stack;
  * Input: s = "()[]{}"
  * Output: true
  */
-class Solution {
-  public boolean isValid(String s) {
+class ValidParentheses_20 {
+  public boolean isValidStack(String s) {
+    Stack<Character> stack = new Stack<>();
+    for (char ch : s.toCharArray()) {
+      if (ch == '{' || ch == '(' || ch == '[') {
+        stack.push(ch);
+      } else {
+        if (stack.isEmpty()) {
+          return false;
+        }
+
+        if (ch == '}' && stack.peek() != '{') {
+          return false;
+        }
+        if (ch == ')' && stack.peek() != '(') {
+          return false;
+        }
+        if (ch == ']' && stack.peek() != '[') {
+          return false;
+        }
+        stack.pop();
+      }
+    }
+    return stack.isEmpty();
+  }
+
+  public boolean isValidHashMap(String s) {
     Map<Character, Character> map = mymap();
     Stack<Character> stack = new Stack<>();
 
