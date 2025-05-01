@@ -21,13 +21,13 @@ class ValidParentheses_20 {
           return false;
         }
 
-        if (ch == '}' && stack.peek() != '{') {
+        if (stack.peek() == '{' && ch != '}') {
           return false;
         }
-        if (ch == ')' && stack.peek() != '(') {
+        if (stack.peek() == '(' && ch != ')') {
           return false;
         }
-        if (ch == ']' && stack.peek() != '[') {
+        if (stack.peek() == '[' && ch != ']') {
           return false;
         }
         stack.pop();
