@@ -1,5 +1,3 @@
-package stack;
-
 import java.util.Stack;
 
 /**
@@ -8,11 +6,17 @@ import java.util.Stack;
 class Solution {
   public String removeDuplicates(String s) {
     Stack<Character> stack = new Stack<>();
-    for (char c : s.toCharArray()) {
-      if (!stack.isEmpty() && stack.peek() == c) {
-        stack.pop();
+
+    for (char ch : s.toCharArray()) {
+      if (stack.isEmpty()) {
+        stack.push(ch);
+        continue;
+      }
+
+      if (stack.peek() != ch) {
+        stack.push(ch);
       } else {
-        stack.push(c);
+        stack.pop();
       }
     }
 
@@ -21,5 +25,10 @@ class Solution {
       sb.append(c);
     }
     return sb.toString();
+
+    // []
+    // [a]
+    // [ab]
+    // [abb] -- here we should remove bb
   }
 }
