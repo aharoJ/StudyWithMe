@@ -1,33 +1,33 @@
-package stack;
-
 import java.util.Stack;
 
-/**
- * BackspaceStringCompare_844
- */
 public class BackspaceStringCompare_844 {
   public boolean backspaceCompare(String s, String t) {
-    Stack<Character> stack1 = new Stack<>();
-    Stack<Character> stack2 = new Stack<>();
-    for (char c : s.toCharArray()) {
-      if (c == '#') {
-        if (!stack1.isEmpty()) {
-          stack1.pop();
-        }
+    Stack<Character> stackOne = new Stack<>();
+    for (char ch : s.toCharArray()) {
+      if (ch != '#') {
+        stackOne.push(ch);
       } else {
-        stack1.push(c);
-      }
-    }
-    for (char c : t.toCharArray()) {
-      if (c == '#') {
-        if (!stack2.isEmpty()) {
-          stack2.pop();
+        if (!stackOne.isEmpty()) {
+          stackOne.pop();
+        } else {
+          continue;
         }
-      } else {
-        stack2.push(c);
       }
     }
 
-    return stack1.equals(stack2);
+    Stack<Character> stackTwo = new Stack<>();
+    for (char ch : t.toCharArray()) {
+      if (ch != '#') {
+        stackTwo.push(ch);
+      } else {
+        if (!stackTwo.isEmpty()) {
+          stackTwo.pop();
+        } else {
+          continue;
+        }
+      }
+    }
+
+    return stackOne.equals(stackTwo);
   }
 }
