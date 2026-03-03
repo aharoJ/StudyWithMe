@@ -1,38 +1,20 @@
-package array;
+import java.util.HashMap;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Stack;
-
-/**
- * Input: nums = [-1,0,1,2,-1,-4]
- * Output: [[-1,-1,2],[-1,0,1]]
- */
-@SuppressWarnings("unused") // Nvim
 class Solution {
-  public boolean isValid(String s) {
-    Stack<Character> stack = new Stack<>();
-    for (char ch : s.toCharArray()) {
-      if (ch == '{' || ch == '(' || ch == '[') {
-        stack.push(ch);
-      } else {
-        if (stack.empty()) {
-          return false;
-        }
+  public boolean isAnagram(String s, String t) {
+    HashMap<Character, Integer> freq = new HashMap<>();
+    for (char c : s.toCharArray()) {
+      freq.put(c, freq.getOrDefault(c, 0) + 1);
+    }
+    for (char c : t.toCharArray()) {
+      freq.put(c, freq.getOrDefault(c, 0) - 1);
+    }
 
-        if (stack.peek() == '}' || stack.peek() == ')' || stack.peek() == ']') {
-          if (stack.pop() != '{') {
-            return false;
-          }
-          if (stack.pop() != '(') {
-            return false;
-          }
-          if (stack.pop() != ')') {
-            return false;
-          }
-        }
+    for (int count : freq.values()) {
+      if (count != 0) {
+        return false;
       }
     }
+    return true;
   }
 }
