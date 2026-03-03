@@ -1,4 +1,3 @@
-package graph;
 
 /**
  * 1: water

@@ -43,7 +43,7 @@ class CombinationSumII_40 {
 
     for (int i = start; i < candidates.length; i++) {
       if (i > start && candidates[i] == candidates[i - 1]) {
-        continue;
+        continue; // skip
       }
       inner.add(candidates[i]);
       helper(candidates, target - candidates[i], result, inner, i + 1);

@@ -61,6 +61,6 @@ public class ReverseNodeskinGroup_25 {
       previousNode = leftNode;
       count--; // Decrease the number of remaining full groups to reverse
     }
-    return head
+    return head;
   }
 }

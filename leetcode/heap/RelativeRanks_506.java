@@ -1,20 +1,11 @@
 package heap;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
 import java.util.PriorityQueue;
-import java.util.Queue;
-
-import linkedlist.ListNode;
 
 /**
+ * RelativeRanks_506
  */
-@SuppressWarnings("unused")
-class Solution {
+public class RelativeRanks_506 {
   public String[] findRelativeRanks(int[] score) {
     String[] result = new String[score.length];
     PriorityQueue<int[]> maxHeap = new PriorityQueue<>(
