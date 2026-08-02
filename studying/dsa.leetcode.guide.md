@@ -159,7 +159,7 @@ The curriculum. Traverse top to bottom at whatever pace you choose. Every stated
 
 *Numbering note: IDs are stable. Rungs grafted during convergence carry letter suffixes at their dependency position rather than triggering a renumber.*
 
-*Range convention: an ID range such as "F00–F124" **includes every letter-suffixed rung within it** (F05a, F52a, F54a, F80a, F95a, F111a, F114a, F119a are all inside F00–F124).*
+*Range convention: an ID range such as "F00–F124" **includes every letter-suffixed rung within it** (the nine suffixed core IDs in that range are F05a, F52a, F54a, F80a, F95a, F111a, F114a, F119a, F123a).*
 
 ### Flight 0 — Algorithmic foundations
 
@@ -686,6 +686,8 @@ public List<List<String>> groupAnagrams(String[] strs) {
 **Use when:** Calculate something for each element based on rest of array.
 
 **[FIXED v1.3]** Uses `long[]` throughout. An `int[]` version is unsafe even when every one-sided accumulator fits, because the final prefix x suffix multiply can still overflow: `[46341, 0, 46341]` has all-fitting accumulators yet the true answer 2,147,488,281 wraps to -2,147,479,015.
+
+**PRECONDITION [v1.3]:** every intermediate prefix product, suffix product, **and** their product must fit signed 64-bit `long`. `long` postpones overflow, it does not remove it — four copies of 2^22 produce 2^66 and silently wrap to 0. If the domain cannot guarantee the bound, use `BigInteger[]`, which is the only unbounded contract.
 
 ```java
 public long[] productExceptSelf(int[] nums) {
@@ -3863,4 +3865,4 @@ public int getSum(int a, int b) {
 
 _Constitution v1.3 — technique-first ladder. 153 rungs: 138 core and 15 named frontier. No calendar, no clock, no deadline._
 _Built by adversarial convergence between Claude (Fable) and Codex, each auditing blind before merging._
-_Release: the immutable git tag **`v1.3`**. That tagged commit is a full-tree snapshot containing the guide, both coach mirrors, the rung/gate state, and the science disclaimer. The change series that produced it is `25f345a^..v1.3` (inclusive)._
+_Release policy: while verification is still returning findings, snapshots are tagged `v1.3-rcN` (release candidates, which may be superseded). The name **`v1.3`** is cut exactly once, as a signed annotated tag, only after an adversarial verification pass returns zero findings — and is never moved afterwards. Earlier drafts of this footer named a `v1.3` tag that was then moved twice; that was wrong, and the policy above exists so it cannot recur._
