@@ -100,6 +100,8 @@ Every task is **Learning Mode** or **Benchmark Mode**, declared before you begin
 - **Learning Mode has no clock.** No elapsed-time threshold, no time box. It ends when you choose.
 - **Benchmark Mode** uses a limit you declare in advance, because interviews have clocks. Benchmark speed never substitutes for a mastery gate.
 
+**Benchmark clean-run contract.** The clock starts when you first read the statement and stops at your submitted answer. **Any substantive assistance — a hint, a reference implementation, the Template Library, autocomplete, or coach input beyond clarifying the statement — invalidates the run as a clean pass.** When the declared limit expires, freeze and record the result first; only then may the task enter Learning Mode recovery and solution study. A benchmark result is reported only as observed counts under stated conditions ("5 of 6 clean under a 45-minute limit") and never closes a mastery gate.
+
 ### Rule 2 — No autocomplete, no LSP
 
 LeetCode editor, plain text, or Vim without LSP. The APIs must be known cold. The coach is not autocomplete either: compiler and API mistakes are pointed out only after your attempt.
@@ -156,6 +158,8 @@ The curriculum. Traverse top to bottom at whatever pace you choose. Every stated
 - **C — Synthesis:** combines already-passed rungs; introduces no new primitive.
 
 *Numbering note: IDs are stable. Rungs grafted during convergence carry letter suffixes at their dependency position rather than triggering a renumber.*
+
+*Range convention: an ID range such as "F00–F124" **includes every letter-suffixed rung within it** (F05a, F52a, F54a, F80a, F95a, F111a, F114a, F119a are all inside F00–F124).*
 
 ### Flight 0 — Algorithmic foundations
 
@@ -316,25 +320,25 @@ The curriculum. Traverse top to bottom at whatever pace you choose. Every stated
 - **F124 — Meet-in-the-middle** *(B)*. **Prereq:** F08, F09, F14, F22, F57.
 - **F125 — Problem reduction** *(B)* **[split, grafted]**. Recognizing that an unfamiliar problem *is* a known one under a mapping — the highest-leverage competitive skill. Name the canonical target and state the mapping. **Prereq:** F00–F124.
 - **F125a — Technique composition** *(C)*. Deliberately chaining independently mastered invariants — Euler tour plus Fenwick, trie plus search, sort plus heap plus sweep. Name the chain before coding. **Prereq:** F125.
-- **F125b — Construction mode** *(B)* **[grafted]**. "Output any X such that…" — building from an invariant instead of searching for an answer. A stance interview lists almost never train and contests demand constantly. **Prereq:** F02, F35, F125.
+- **F125b — Construction mode** *(B)* **[grafted]**. "Output any X such that…" — building from an invariant instead of searching for an answer. A stance interview lists almost never train and contests demand constantly. **Prereq:** F02, F35, F125, F125a.
 - **F126 — Blind mixed transfer** *(C)*. The terminal rung. Certified only by the frozen assessment in Article VIII. **Prereq:** F125b.
 
 ### Named frontier — X01–X12 (non-gating)
 
 These do not block F126. Pull one in only when a demonstrated target needs it.
 
-- **X01 — Augmented randomized BST/treap.** **Prereq:** F03, F14, F48, F62.
-- **X02 — Rollback DSU and offline dynamic connectivity.** **Prereq:** F49, F51, F54, F97.
-- **X03 — Persistent segment trees.** **Prereq:** F19, F51, F69.
-- **X04 — Small-to-large merging and centroid decomposition.** **Prereq:** F13, F48, F100, F102.
-- **X05 — Min-cost flow and advanced matching.** **Prereq:** F92, F105, F106, F109.
-- **X06 — Suffix automata.** **Prereq:** F120, F121.
-- **X07 — Advanced DP optimizations** (monotone deque, divide-and-conquer, Knuth, convex hull, Li Chao). **Prereq:** F34, F48, F79, F80, F109.
-- **X08 — Advanced computational geometry.** **Prereq:** F37, F48, F123.
-- **X09 — FFT/NTT and polynomial algorithms.** **Prereq:** F13, F109, F111.
-- **X10 — Advanced randomized/offline techniques.** **Prereq:** F05, F14, F24, F54.
-- **X11 — 2-SAT through implication graphs.** **Prereq:** F97.
-- **X12 — Binary tries and XOR optimization.** **Prereq:** F09, F116.
+- **X01 — Augmented randomized BST/treap** *(B)*. **Prereq:** F03, F14, F48, F62.
+- **X02 — Rollback DSU and offline dynamic connectivity** *(B)*. **Prereq:** F49, F51, F54, F97.
+- **X03 — Persistent segment trees** *(B)*. **Prereq:** F19, F51, F69.
+- **X04 — Small-to-large merging and centroid decomposition** *(B)*. **Prereq:** F13, F48, F100, F102.
+- **X05 — Min-cost flow and advanced matching** *(B)*. **Prereq:** F92, F105, F106, F109.
+- **X06 — Suffix automata** *(A)*. **Prereq:** F120, F121.
+- **X07 — Advanced DP optimizations** *(C)* (monotone deque, divide-and-conquer, Knuth, convex hull, Li Chao). **Prereq:** F34, F48, F79, F80, F109.
+- **X08 — Advanced computational geometry** *(C)*. **Prereq:** F37, F48, F123.
+- **X09 — FFT/NTT and polynomial algorithms** *(B)*. **Prereq:** F13, F109, F111.
+- **X10 — Advanced randomized/offline techniques** *(C)*. **Prereq:** F05, F14, F24, F54.
+- **X11 — 2-SAT through implication graphs** *(A)*. **Prereq:** F97.
+- **X12 — Binary tries and XOR optimization** *(A)*. **Prereq:** F09, F116.
 
 ---
 
@@ -349,7 +353,11 @@ A session has a **shape**, not a duration. Learning Mode carries no clock (Rule 
 5. **Redo.** Delete and reconstruct from the model and invariant. (Rule 6)
 6. **Log.** Two lines minimum: what broke, root cause. (Rule 11)
 
-Stop whenever you choose. A session that covers only step 2 is a legitimate session.
+**Closure boundary.** You choose when to stop, with two obligations that must close first:
+- **Every session ends with a log entry** (step 6), even a clean one. A session with no failure records what evidence was observed and states "no failure" — never invent a root cause.
+- **Once a task reaches a solved or studied implementation, its redo (step 5) closes before you stop.** You may stop before ever reaching that point.
+
+A session that covers only step 2 is a legitimate session: nothing was solved, so nothing is owed but the log.
 
 ### The eight mastery gates
 
@@ -424,7 +432,7 @@ Only then does recovery permit **one approach-only hint**, which you implement y
 
 ### When burned out
 
-Full stop for at least a day. Physical activity. Return gently — a short orienting session first, a normal one after. There is no penalty and no lost ground; the ladder does not expire.
+Stop. Move your body. Return when you are ready — a short orienting session first, a fuller one when that feels fine. **Readiness, not elapsed time, decides re-entry**; prescribing a minimum number of days would reintroduce exactly the clock this Constitution removes. There is no penalty and no lost ground; the ladder does not expire.
 
 ---
 
@@ -675,6 +683,7 @@ public List<List<String>> groupAnagrams(String[] strs) {
 
 ```java
 public int[] productExceptSelf(int[] nums) {
+    if (nums == null || nums.length == 0) return new int[0]; // [FIXED v1.3]
     int n = nums.length;
     int[] result = new int[n];
 
@@ -772,7 +781,7 @@ public int longestConsecutive(int[] nums) {
             int length = 1;
             int current = num;
 
-            while (set.contains(current + 1)) {
+            while (current != Integer.MAX_VALUE && set.contains(current + 1)) { // [FIXED v1.3] MAX+1 wraps to MIN
                 current++;
                 length++;
             }
@@ -809,7 +818,7 @@ public int[] twoPointerOpposite(int[] nums, int target) {
     int right = nums.length - 1;
 
     while (left < right) {
-        int sum = nums[left] + nums[right];
+        long sum = (long) nums[left] + nums[right]; // [FIXED v1.3] int sum wraps at extremes
 
         if (sum == target) {
             return new int[]{left, right};
@@ -852,10 +861,10 @@ public List<List<Integer>> threeSum(int[] nums) {
 
         int left = i + 1;
         int right = nums.length - 1;
-        int target = -nums[i];
+        long target = -(long) nums[i]; // [FIXED v1.3] -MIN_VALUE overflows in int
 
         while (left < right) {
-            int sum = nums[left] + nums[right];
+            long sum = (long) nums[left] + nums[right]; // [FIXED v1.3]
 
             if (sum == target) {
                 result.add(Arrays.asList(nums[i], nums[left], nums[right]));
@@ -1017,7 +1026,8 @@ public int trap(int[] height) {
 
 ```java
 public int maxSumFixedWindow(int[] nums, int k) {
-    if (nums == null || nums.length < k) return 0; // [FIXED v1.3] guard k > n
+    if (nums == null || k < 1 || nums.length < k)
+        throw new IllegalArgumentException("[v1.3 contract] require 1 <= k <= nums.length");
     // Build initial window
     int windowSum = 0;
     for (int i = 0; i < k; i++) {
@@ -1048,7 +1058,7 @@ public int maxSumFixedWindow(int[] nums, int k) {
 
 > **Rung:** F29 · evidence exercise
 
-**Use when:** Minimum subarray with condition
+**Use when:** Minimum subarray with condition. **PRECONDITION [v1.3]:** all elements nonnegative — the shrink step assumes removing a left element cannot increase the sum. With negatives (e.g. target 3 on `[2,-1,2,1]`) this returns 3 instead of 2; use prefix sums + a map (F17/F08) instead.
 
 ```java
 public int minSubArrayLen(int target, int[] nums) {
@@ -1567,7 +1577,10 @@ public int binarySearchRight(int[] nums, int target) {
         }
     }
 
-    return left - 1; // NOTE: -1
+    // [FIXED v1.3] upperBound-1 is the PREDECESSOR position, not necessarily an occurrence.
+    // Verify the target is actually there, else report absence.
+    int idx = left - 1;
+    return (idx >= 0 && nums[idx] == target) ? idx : -1;
 }
 ```
 
@@ -1582,7 +1595,7 @@ public int binarySearchRight(int[] nums, int target) {
 
 > **Rung:** F23 · evidence exercise
 
-**Use when:** Array is sorted but rotated
+**Use when:** Array is sorted but rotated. **PRECONDITION [v1.3]:** distinct elements. With duplicates the sorted-half test is ambiguous — `[1,0,1,1,1]` searching 0 returns -1.
 
 ```java
 public int searchRotated(int[] nums, int target) {
@@ -1631,7 +1644,7 @@ public int searchRotated(int[] nums, int target) {
 
 > **Rung:** F23 · evidence exercise
 
-**Use when:** Find pivot point in rotated array
+**Use when:** Find pivot point in rotated array. **PRECONDITION [v1.3]:** distinct elements — `[1,1,1,0,1]` returns 1, not 0.
 
 ```java
 public int findMin(int[] nums) {
@@ -1690,7 +1703,7 @@ public int minEatingSpeed(int[] piles, int h) {
 private boolean canFinish(int[] piles, int speed, int h) {
     long hours = 0; // [FIXED v1.3] int overflows: 10^4 piles x 10^9 at speed 2500 = 4e9 hours
     for (int pile : piles) {
-        hours += (pile + speed - 1) / speed; // Ceiling division
+        hours += ((long) pile + speed - 1) / speed; // [FIXED v1.3] widen BEFORE the ceiling add
     }
     return hours <= h;
 }
@@ -1942,6 +1955,7 @@ class LRUCache {
     }
 
     public LRUCache(int capacity) {
+        if (capacity < 1) throw new IllegalArgumentException("[v1.3 contract] capacity >= 1"); // else eviction deletes the dummy head
         this.capacity = capacity;
         this.map = new HashMap<>();
         this.head = new Node(0, 0);
@@ -2332,11 +2346,11 @@ private TreeNode deserializeHelper(Queue<String> queue) {
 
 ---
 
-#### 8.1 Heap — Basic Operations
+#### 8.1 Heap — Library Reference (NOT rung evidence)
 
-> **Rung:** F44 · evidence exercise
+> **Rung:** none. **Post-rung reference only.** F44 requires a heap built from scratch — `siftUp`, `siftDown`, linear heapify — and Rule 10 states the library cannot substitute. This block is pseudocode-style API reference, not runnable evidence.
 
-**Use when:** Need quick access to min/max element
+**Use when:** Need quick access to min/max element. *(Reference snippet — fragments, not a compilable unit.)*
 
 ```java
 // Min-heap (default)
@@ -2501,7 +2515,7 @@ class MedianFinder {
 
 #### 9.1 Backtracking — Subsets
 
-> **Rung:** F57 + F80 · evidence exercise
+> **Rung:** F57 · evidence exercise. *(Not F80 — this is recursive enumeration with no bitmask state or DP recurrence.)*
 
 **Use when:** Generate all subsets
 
@@ -3073,28 +3087,29 @@ class UnionFind {
 ```java
 // [FIXED v1.3] CONTRACT: nonnegative edge weights ONLY. Negative edges or a bounded
 // edge count ("at most K stops") require Bellman-Ford (F93) or (node, edgesUsed) state (F95).
-public int[] dijkstra(int n, List<int[]>[] graph, int start) {
-    int[] dist = new int[n];
-    Arrays.fill(dist, Integer.MAX_VALUE);
+public long[] dijkstra(int n, List<int[]>[] graph, int start) { // [FIXED v1.3] long distances
+    long[] dist = new long[n];
+    Arrays.fill(dist, Long.MAX_VALUE);
     dist[start] = 0;
 
     // Min-heap: [distance, node]
-    PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> Integer.compare(a[0], b[0])); // [FIXED v1.3]
-    pq.offer(new int[]{0, start});
+    PriorityQueue<long[]> pq = new PriorityQueue<>((a, b) -> Long.compare(a[0], b[0])); // [FIXED v1.3]
+    pq.offer(new long[]{0, start});
 
     while (!pq.isEmpty()) {
-        int[] curr = pq.poll();
-        int d = curr[0], node = curr[1];
+        long[] curr = pq.poll();
+        long d = curr[0];
+        int node = (int) curr[1];
 
         if (d > dist[node]) continue; // Skip outdated entry
 
         for (int[] edge : graph[node]) {
             int neighbor = edge[0], weight = edge[1];
-            int newDist = dist[node] + weight;
+            long newDist = dist[node] + weight; // [FIXED v1.3]
 
             if (newDist < dist[neighbor]) {
                 dist[neighbor] = newDist;
-                pq.offer(new int[]{newDist, neighbor});
+                pq.offer(new long[]{newDist, neighbor});
             }
         }
     }
@@ -3186,7 +3201,7 @@ public int coinChange(int[] coins, int amount) {
 
 #### 13.4 DP — Longest Increasing Subsequence
 
-> **Rung:** F76 + F77 · evidence exercise
+> **Rung:** F76 · evidence exercise. *(Not F77 — this is the quadratic length-only DP. F77 requires the O(n log n) tails formulation **with reconstruction**, which is not implemented here and must be derived at the rung.)*
 
 **Use when:** Find LIS length
 
@@ -3373,11 +3388,11 @@ public int minDistance(String word1, String word2) {
 
 ```java
 public boolean canJump(int[] nums) {
-    int maxReach = 0;
+    long maxReach = 0; // [FIXED v1.3] i + nums[i] wraps at MAX_VALUE
 
     for (int i = 0; i < nums.length; i++) {
         if (i > maxReach) return false;
-        maxReach = Math.max(maxReach, i + nums[i]);
+        maxReach = Math.max(maxReach, (long) i + nums[i]);
     }
 
     return true;
@@ -3421,8 +3436,8 @@ public int jump(int[] nums) {
 
 ```java
 public int canCompleteCircuit(int[] gas, int[] cost) {
-    int totalTank = 0;
-    int currTank = 0;
+    long totalTank = 0; // [FIXED v1.3] tank accumulation wraps in int
+    long currTank = 0;
     int start = 0;
 
     for (int i = 0; i < gas.length; i++) {
@@ -3452,6 +3467,7 @@ public int canCompleteCircuit(int[] gas, int[] cost) {
 
 ```java
 public int[][] merge(int[][] intervals) {
+    if (intervals == null || intervals.length == 0) return new int[0][]; // [FIXED v1.3]
     Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0])); // [FIXED v1.3]
 
     List<int[]> result = new ArrayList<>();
@@ -3655,6 +3671,7 @@ public List<Integer> spiralOrder(int[][] matrix) {
 
 ```java
 public void setZeroes(int[][] matrix) {
+    if (matrix == null || matrix.length == 0 || matrix[0].length == 0) return; // [FIXED v1.3]
     int m = matrix.length, n = matrix[0].length;
     boolean firstRowZero = false, firstColZero = false;
 
@@ -3824,5 +3841,6 @@ public int getSum(int a, int b) {
 
 ---
 
-_Constitution v1.3 — technique-first ladder. 139 rungs (F00–F126 core, X01–X12 frontier). No calendar, no clock, no deadline._
+_Constitution v1.3 — technique-first ladder. 150 rungs: 138 core (F00–F126 plus 11 grafted/split suffix IDs) and 12 named frontier (X01–X12). No calendar, no clock, no deadline._
 _Built by adversarial convergence between Claude (Fable) and Codex, each auditing blind before merging._
+_Release note: v1.3 is the commit range `25f345a..HEAD` — the guide, both coach mirrors, and the initial rung/gate state together. No single commit is the release._

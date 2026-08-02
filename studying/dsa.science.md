@@ -1,3 +1,14 @@
+> ⚠️ **HISTORICAL / NON-GOVERNING (as of Constitution v1.3).**
+> This file predates v1.3 and still describes the retired program: spaced-review day schedules
+> (+1/+3/+7/+14/+28), Weeks 1–10, three timed phases, timed session blocks, a delayed redo, and
+> Anki-style repetition. **None of that governs.** v1.3 removed every calendar and clock from
+> study, makes the redo immediate, and triggers review by dependency (a failed descendant reopens
+> its prerequisite) rather than by elapsed days.
+> Read this only as background on memory research. Where it conflicts with
+> `dsa.leetcode.guide.md`, the Constitution wins — without exception.
+
+---
+
 # The Science of Studying DSA — Research-Backed Methods
 
 > **For:** aharoJ — DSA Interview Prep
