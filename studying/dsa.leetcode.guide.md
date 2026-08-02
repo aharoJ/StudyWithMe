@@ -17,7 +17,7 @@ v1.2 was a NeetCode-150 wrapper: eighteen categories, eighteen Monday-to-Saturda
 2. **Most of the field was missing.** No number theory, no modular arithmetic, no range-query structures, no computational geometry, no string algorithms beyond a basic trie, no flow or matching, no 0/1 knapsack, no correctness-proof technique, and — most importantly — no method for inferring which techniques are even possible from the input constraints.
 3. **The calendar was fiction.** Eighteen category schedules needed 108 program-days against 60 available; the weekly curriculum silently dropped 31 problems to make it fit, while claiming full coverage.
 
-v1.3 replaces all of it with one ladder of **152 rungs** — 138 core (F00–F126 plus grafted/split suffix IDs) and 14 named frontier (X01–X12, X07 split three ways). There is no calendar, no week, no day, no hour, and no deadline anywhere in this document.
+v1.3 replaces all of it with one ladder of **153 rungs** — 138 core (F00–F126 plus grafted/split suffix IDs) and 15 named frontier (X-prefixed). There is no calendar, no week, no day, no hour, and no deadline anywhere in this document.
 
 ---
 
@@ -333,9 +333,10 @@ These do not block F126. Pull one in only when a demonstrated target needs it.
 - **X04 — Small-to-large merging and centroid decomposition** *(B)*. **Prereq:** F13, F48, F100, F102.
 - **X05 — Min-cost flow and advanced matching** *(B)*. **Prereq:** F92, F105, F106, F109.
 - **X06 — Suffix automata** *(A)*. **Prereq:** F120, F121.
-- **X07a — Monotone-deque and divide-and-conquer DP optimization** *(B)*. **Prereq:** F34, F79, F80.
-- **X07b — Knuth optimization** *(B)*. Requires the quadrangle-inequality precondition to be proved, not assumed. **Prereq:** X07a.
-- **X07c — Convex-hull trick and Li Chao trees** *(B)*. Introduces line-container machinery no earlier rung supplies. **Prereq:** F48, X07a.
+- **X07a — Monotone-deque DP optimization** *(A)*. Deque dominance over a moving candidate window. **Prereq:** F34, F79, F80.
+- **X07b — Divide-and-conquer DP optimization** *(A)*. Rests on monotonicity of optimal split indices — a different proof skeleton from X07a, so it is separately falsifiable. **Prereq:** F13, F79, F80.
+- **X07c — Knuth optimization** *(A)*. The quadrangle inequality must be **proved**, never assumed. **Prereq:** F79, X07b.
+- **X07d — Convex-hull trick and Li Chao trees** *(B)*. Line-container machinery no earlier rung supplies. **Prereq:** F48, F79, F80.
 - **X08 — Advanced computational geometry** *(C)*. **Prereq:** F37, F48, F123.
 - **X09 — FFT/NTT and polynomial algorithms** *(B)*. **Prereq:** F13, F109, F111.
 - **X10 — Advanced randomized/offline techniques** *(C)*. **Prereq:** F05, F14, F24, F54.
@@ -387,7 +388,7 @@ Progress is reported as exactly four things: **capability receipts earned**, **r
 ### State record
 
 ```text
-rung_id:           Fxx | Fxxa | Xxx — name
+rung_id:           matches [FX][0-9]{2,3}[a-z]?  (e.g. F00, F05a, F126, X01, X07c) — name
 payload_class:     A | B | C
 prerequisites:     passed | repair-needed (name which)
 open_gates:        [model, applicability, derivation, cold_java, bounds, verification, transfer, reconstruction]
@@ -517,7 +518,8 @@ The entry point. Read the constraints first, land on a rung, then open the ladde
 | range queries + updates | dynamic structure | F50, F51, F52 |
 | "output any valid X" | construction, not search | F125b |
 | contiguous subarray/substring | window or prefix | F28, F29, F17 |
-| subarray sum with negatives | prefix + hash (window fails) | F17, F08 |
+| subarray with **exact** sum / counting, negatives allowed | prefix + hash | F17, F08 |
+| **minimum-length** subarray with sum ≥ target, negatives allowed | prefix + monotonic deque (window AND hash both fail) | F17, F34 |
 | next/previous greater, spans | monotonic stack | F33 |
 | window extremum | monotonic deque | F34 |
 | shortest path, unweighted | BFS | F85, F90 |
@@ -683,13 +685,13 @@ public List<List<String>> groupAnagrams(String[] strs) {
 
 **Use when:** Calculate something for each element based on rest of array.
 
-**PRECONDITION [v1.3]:** every prefix/suffix product must fit in signed 32-bit `int`. `[46341, 46341, 46341]` already overflows (returns -2147479015). If the domain does not guarantee this, use `long[]` accumulators and return type.
+**[FIXED v1.3]** Uses `long[]` throughout. An `int[]` version is unsafe even when every one-sided accumulator fits, because the final prefix x suffix multiply can still overflow: `[46341, 0, 46341]` has all-fitting accumulators yet the true answer 2,147,488,281 wraps to -2,147,479,015.
 
 ```java
-public int[] productExceptSelf(int[] nums) {
-    if (nums == null || nums.length == 0) return new int[0]; // [FIXED v1.3]
+public long[] productExceptSelf(int[] nums) {
+    if (nums == null || nums.length == 0) return new long[0];
     int n = nums.length;
-    int[] result = new int[n];
+    long[] result = new long[n];
 
     // First pass: prefix products (left to right)
     result[0] = 1;
@@ -698,7 +700,7 @@ public int[] productExceptSelf(int[] nums) {
     }
 
     // Second pass: multiply by suffix products (right to left)
-    int suffix = 1;
+    long suffix = 1;
     for (int i = n - 1; i >= 0; i--) {
         result[i] *= suffix;
         suffix *= nums[i];
@@ -1041,7 +1043,7 @@ public long maxSumFixedWindow(int[] nums, int k) { // [FIXED v1.3] long: window 
 
     // Slide window
     for (int i = k; i < nums.length; i++) {
-        windowSum += nums[i] - nums[i - k]; // add new, remove old
+        windowSum += (long) nums[i] - nums[i - k]; // [FIXED v1.3] widen BEFORE subtracting: MAX-MIN wraps to -1
         maxSum = Math.max(maxSum, windowSum);
     }
 
@@ -3683,10 +3685,13 @@ public List<Integer> spiralOrder(int[][] matrix) {
 ```java
 // PRECONDITION [v1.3]: rectangular matrix, every row non-null with equal length.
 public void setZeroes(int[][] matrix) {
-    if (matrix == null || matrix.length == 0 || matrix[0] == null || matrix[0].length == 0) return;
+    if (matrix == null || matrix.length == 0) return;
+    // [FIXED v1.3] validate EVERY row before any early return, else [[], [1]] and [null, [1]] slip through
+    int width = (matrix[0] == null) ? -1 : matrix[0].length;
     for (int[] row : matrix)
-        if (row == null || row.length != matrix[0].length)
-            throw new IllegalArgumentException("[v1.3 contract] matrix must be rectangular");
+        if (row == null || row.length != width)
+            throw new IllegalArgumentException("[v1.3 contract] matrix must be rectangular with non-null rows");
+    if (width == 0) return;
     int m = matrix.length, n = matrix[0].length;
     boolean firstRowZero = false, firstColZero = false;
 
@@ -3856,6 +3861,6 @@ public int getSum(int a, int b) {
 
 ---
 
-_Constitution v1.3 — technique-first ladder. 152 rungs: 138 core and 14 named frontier. No calendar, no clock, no deadline._
+_Constitution v1.3 — technique-first ladder. 153 rungs: 138 core and 15 named frontier. No calendar, no clock, no deadline._
 _Built by adversarial convergence between Claude (Fable) and Codex, each auditing blind before merging._
 _Release: the immutable git tag **`v1.3`**. That tagged commit is a full-tree snapshot containing the guide, both coach mirrors, the rung/gate state, and the science disclaimer. The change series that produced it is `25f345a^..v1.3` (inclusive)._
