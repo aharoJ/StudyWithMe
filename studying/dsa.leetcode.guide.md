@@ -1,173 +1,537 @@
-# DSA Interview Constitution — LeetCode Combat Standard
+# DSA Mastery Constitution — Technique-First Ladder
 
-> **Version:** 1.2
+> **Version:** 1.3
 > **Author:** aharoJ
-> **Last Updated:** January 2025
-> **Purpose:** Paste this at the start of any LLM conversation about DSA prep. Every rule is non-negotiable. This document governs all interview preparation until you pass.
-> **Structure:** Follows NeetCode 150 roadmap exactly.
+> **Last Updated:** August 2026
+> **Purpose:** The single governing document for building the machinery to *derive* algorithms — not to recall problems. Paste it at the start of any LLM session about DSA work.
+> **Structure:** One dependency-ordered ladder of techniques. Problems are evidence, never curriculum.
+> **Serves:** interview loops (LeetCode-style) and competitive programming (Codeforces/CSES-style) from the same machinery.
+
+---
+
+## What changed in v1.3, and why
+
+v1.2 was a NeetCode-150 wrapper: eighteen categories, eighteen Monday-to-Saturday schedules, a ten-week calendar, and ~60 "templates." It was executed repeatedly and did not work. Three structural reasons, each now fixed:
+
+1. **About a third of its templates were not techniques.** They were memorized solutions to single problems — length-prefix string encoding, the container-with-most-water pointer rule, rotated-array binary search, set-matrix-zeroes marker trick. Typing an answer five times builds recall of that answer. It builds no machinery.
+2. **Most of the field was missing.** No number theory, no modular arithmetic, no range-query structures, no computational geometry, no string algorithms beyond a basic trie, no flow or matching, no 0/1 knapsack, no correctness-proof technique, and — most importantly — no method for inferring which techniques are even possible from the input constraints.
+3. **The calendar was fiction.** Eighteen category schedules needed 108 program-days against 60 available; the weekly curriculum silently dropped 31 problems to make it fit, while claiming full coverage.
+
+v1.3 replaces all of it with one ladder of **150 rungs** — 138 core (F00–F126 plus grafted/split IDs) and 12 named frontier (X01–X12). There is no calendar, no week, no day, no hour, and no deadline anywhere in this document.
 
 ---
 
 ## The Commitment
 
-Before reading further, sign this. Not metaphorically. Actually write your name.
+Sign it. Actually write your name.
 
-By adopting this constitution, I commit to:
+By adopting this Constitution, I commit to:
 
-1. **Following this protocol exactly for 8-10 weeks** — no modifications, no "improvements"
-2. **No excuses, no shortcuts, no "I'll skip today"** — consistency beats intensity
-3. **Documenting every failure in my error log** — unnamed bugs repeat forever
-4. **Not advancing until checkpoints pass** — depth over breadth
-5. **Trusting the process when it feels stupid** — typing templates 5x feels dumb, but it works
+1. **Deriving before retrieving** — every implementation follows a model, an invariant or recurrence, a correctness argument, and a complexity budget.
+2. **Documenting every failure in the error log** — unnamed bugs repeat forever.
+3. **Not advancing until the gates pass** — depth over breadth, evidence over feeling.
+4. **Trusting the process when it feels slow** — implementing a heap from scratch when `PriorityQueue` exists feels stupid, and is the entire point.
+5. **Showing up on my own cadence, indefinitely** — this program has no end date and measures no elapsed time.
 
 **SIGNED:** \***\*\*\*\*\*\*\***\_\***\*\*\*\*\*\*\***
-**DATE:** \***\*\*\*\*\*\*\***\_\***\*\*\*\*\*\*\***
-**END DATE (8 weeks out):** \***\*\*\*\*\*\*\***\_\***\*\*\*\*\*\*\***
 
 ---
 
 ## Article I — Philosophy
 
-You are not learning algorithms. You already know them. You are building **implementation fluency** — the ability to translate pattern recognition into working code under time pressure.
+You are not learning algorithms for the first time. You are building the machinery to **derive** them under pressure, on problems you have never seen.
 
 ### The Three Laws
 
-1. **Muscle memory over understanding.** If you can't type it without thinking, you don't know it.
-2. **Repetition over volume.** 20 problems done 5 times each beats 100 problems done once.
-3. **Templates over creativity.** Interviews reward reliable execution, not elegant solutions.
+1. **Derivation over recognition.** If you solved it because you remembered it, you learned nothing. Recognition of a familiar statement can never satisfy a gate.
+2. **Machinery over volume.** One technique, modeled and proved and falsified and transferred, beats fifty problems solved once.
+3. **Invariants over code.** The invariant is the unit of study. Code is the proof that you hold the invariant; it is not the thing being learned.
 
 ### The Interview Reality Check
 
-You have **45 minutes**. Subtract:
-
-- 5 min: Read problem, clarify edge cases
-- 5 min: Explain approach to interviewer
-- 5 min: Test and debug
-- **Remaining: 30 minutes to write working code**
-
-If you can't write a sliding window from memory in under 3 minutes, you will fail. This constitution exists to fix that.
+A 45-minute interview leaves roughly 30 minutes of writing time after clarification, explanation, and testing. But speed is a **benchmark result**, not a study target. You train the machinery without a clock; you measure speed only inside a declared Benchmark run. Training under permanent time pressure produces panic, not fluency.
 
 ### The Architect's Trap
 
-Your brain is wired for system design: abstractions, contracts, boundaries, scalability.
-
-LeetCode requires the opposite: **imperative, line-by-line, mechanical code execution.**
-
-You must learn to switch modes. When you see a LeetCode problem, you are not an architect. You are a construction worker with a hammer and a stopwatch.
+Your instincts are built for system design: abstractions, contracts, boundaries. Algorithmic work runs the other way — imperative, line-by-line, mechanical. You must be able to switch modes deliberately. When you sit down to a problem you are not an architect; you are a machinist with an invariant and a blank file.
 
 ---
 
-## Article II — Current State Assessment
+## Article II — Diagnosis
 
-| Property         | Value                                                    |
-| ---------------- | -------------------------------------------------------- |
-| Target Companies | FAANG-tier (Google, Amazon, TikTok, Roblox, etc.)        |
-| Interview Stage  | Consistently reaching on-sites, failing DSA rounds       |
-| Core Problem     | Pattern recognition: ✅ Strong / Implementation: ❌ Weak |
-| Time Available   | 2-3 hours/day                                            |
-| Language         | Java (non-negotiable — matches production experience)    |
-| Timeline         | 8-10 weeks to interview-ready                            |
+*(Rewritten in v1.3. The previous diagnosis was wrong, and acting on it wasted years.)*
 
-### Diagnostic Markers
+**The previous theory was an implementation-fluency gap** — pattern recognition strong, fingers slow. That theory predicts that typing faster fixes the problem. It was tested repeatedly and it failed.
 
-You exhibit classic "architect's implementation gap":
+**The accurate diagnosis:** the prior artifact optimized *recognition of familiar statements* and *reproduction of known implementations*. Repeated completion never established transfer to unfamiliar variants, because a fixed problem list structurally cannot teach it. No number of problems on a list fixes this. Specifically, a list cannot teach:
 
-| Symptom                        | Evidence                               |
-| ------------------------------ | -------------------------------------- |
-| Know the pattern instantly     | "This is clearly sliding window"       |
-| Freeze at keyboard             | 3-second delay before typing starts    |
-| Code doesn't compile first try | Syntax errors, wrong method names      |
-| Off-by-one errors              | Window size calculations, loop bounds  |
-| Timeout on debugging           | Can't trace logic without running code |
+| What a fixed list cannot teach | Why |
+|---|---|
+| Direction of reasoning | A list starts at the problem. A deriver starts at the constraints. |
+| Correctness argument | Lists validate by test cases, never by proof. |
+| Problem reduction | Recognizing an unfamiliar problem *is* a known one in costume. |
+| Technique composition | Lists are one technique per problem; hard problems are three or four deep. |
+| Construction | Lists are decision/optimization; "output any X such that…" is a different stance. |
+| Diagnosis under uncertainty | Having the answer available abolishes the only condition that builds the skill. |
 
-### Root Cause
+v1.3 therefore measures **separate capabilities**: constraint inference, model and state design, proof, reduction, technique selection and composition, cold Java implementation, adversarial verification, and blind transfer. Implementation fluency remains necessary — but it is one gate among eight, not the root-cause theory.
 
-Your fingers don't know the patterns. Your brain does. There's a translation layer that adds latency and introduces errors. We're removing that layer.
+### Current state
+
+| Property | Value |
+|---|---|
+| Target | FAANG-tier interview loops **and** Codeforces/CSES-grade derivation |
+| Language | Java (non-negotiable — matches production experience) |
+| Cadence | Self-chosen, sustained, indefinite. No deadline is recorded here by design. |
+| Known-strong | Pattern recognition on *familiar* statements |
+| Known-weak | Everything the table above lists — to be replaced by observed gate evidence, not assumed |
+
+This table reports observed evidence and open gates. It never asserts that you already know all algorithms.
 
 ---
 
 ## Article III — Hard Rules
 
-Violating any of these resets your progress. No exceptions.
+Violating a hard rule reopens the affected gate. No exceptions.
 
-### Rule 1: No IDE Autocomplete During Practice
+### Rule 1 — Two modes, declared before work starts
 
-```
-❌ BANNED: IntelliJ, VS Code with Java extensions, any autocomplete
-✅ REQUIRED: LeetCode editor, plain text file, or Vim without LSP
-```
+Every task is **Learning Mode** or **Benchmark Mode**, declared before you begin.
+- **Learning Mode has no clock.** No elapsed-time threshold, no time box. It ends when you choose.
+- **Benchmark Mode** uses a limit you declare in advance, because interviews have clocks. Benchmark speed never substitutes for a mastery gate.
 
-**Why:** Interviews don't have autocomplete. If you can't remember `ArrayDeque` vs `LinkedList` vs `ArrayList`, you will freeze. Learn the APIs cold.
+### Rule 2 — No autocomplete, no LSP
 
-### Rule 2: No Running Code for First 15 Minutes
+LeetCode editor, plain text, or Vim without LSP. The APIs must be known cold. The coach is not autocomplete either: compiler and API mistakes are pointed out only after your attempt.
 
-```
-❌ BANNED: Click "Run" before 15 minutes elapsed
-✅ REQUIRED: Write complete solution, trace manually, THEN run
-```
+### Rule 3 — Derive before you type
 
-**Why:** Running code is a crutch. You use it to avoid thinking.
+Before implementation: formalize the contract and constraints, produce the simplest correct brute force, state the invariant or recurrence, and give the complexity budget. Brute force is not a fallback — it is a required derivation tool and your correctness oracle.
 
-### Rule 3: Templates Must Be Typed AND Vocalized
+### Rule 4 — No running code before the manual trace
 
-```
-❌ BANNED: Reading template code and "understanding" it
-❌ BANNED: Silent typing
-✅ REQUIRED: Type template while saying each line out loud
-```
+Write the complete solution and trace it by hand on adversarial small cases before executing. Running code is not a substitute for thinking.
 
-**Why:** Vocalizing engages a third memory pathway. Your architect brain learns through explanation.
+### Rule 5 — No reveal before recovery is exhausted
 
-### Rule 4: Immediate Redo After Every Problem
+In Learning Mode, exhaust the uncertainty-diagnosis chain first (Article VII): formalize contract and constraints → derive a brute-force state → state an invariant or recurrence hypothesis → attack it with counterexamples → name the smallest missing fact. Recovery then permits **one approach-only hint** and your own implementation. **Solution study is the single sanctioned point** at which reference implementation details may be shown. A clean solve needs no reveal. Before solution study: no solution, no pseudocode dump, no line-by-line walkthrough.
 
-```
-❌ BANNED: Solving a problem once and moving on
-✅ REQUIRED: Delete solution, rewrite from scratch immediately
-```
+### Rule 6 — Immediate learning redo after every task
 
-**Why:** The first solve is comprehension. The redo is learning.
+After a **clean independent solve**: delete the accepted implementation and reconstruct it from the stated model and invariant.
+After **recovery or solution study**: close every reference, restate the model and invariant, rewrite from a blank file, trace manually, then run.
+This rewrite is mandatory and completes the task's learning cycle. **It does not make the task clean evidence, and it does not by itself pass a rung or a gate.**
 
-### Rule 5: Same Pattern Until Automatic
+### Rule 7 — Mastery evidence is gate-specific and assistance-sensitive
 
-```
-❌ BANNED: Switching patterns before current pattern is automatic
-✅ REQUIRED: Stay on one pattern until you can solve 3 problems without hesitation
-```
+A rung advances only when every gate has independently observed evidence. Help leaves every gate whose substance was supplied **open**; valid independent evidence on unaffected gates is preserved. A shown or substantially supplied solution — including its learning redo — can never certify **Cold Java**, **Blind Transfer**, or **Independent Reconstruction**. A prompt exposed during recovery or solution study is permanently ineligible as Blind Transfer evidence. An open gate closes only through a clean probe with no technique label, no hint, no reference implementation, and no autocomplete.
 
-### Rule 6: Error Log Every Single Day
+> **Learning-cycle completion and mastery certification are separate statuses.** Confusing them is how the previous version let a studied solution feel like a passed skill.
 
-```
-❌ BANNED: Finishing a session without writing down what broke
-✅ REQUIRED: 2-line minimum error log entry per session
-```
+### Rule 8 — Same rung until the gates pass; prerequisites are hard
 
-### Rule 7: Java Only
+You may not enter a rung whose prerequisites are open. If a failure on a later rung traces to an earlier invariant, that earlier rung **reopens immediately** and is repaired before deeper work continues. There is no time-based review schedule; review is dependency-triggered.
 
-```
-❌ BANNED: Python, JavaScript, or any other language
-✅ REQUIRED: Java for all problems, all practice, all mocks
-```
+### Rule 9 — Java only
 
-### Rule 8: Time Boxes Are Sacred
+All work, all templates, all benchmarks. No "let me just show the idea in Python."
 
-```
-❌ BANNED: Spending 2 hours on one problem
-✅ REQUIRED: 25 min attempt → recovery protocol → solution study
-```
+### Rule 10 — Library use follows implementation
+
+`PriorityQueue` does not replace building a heap. `Arrays.sort` does not replace sorting invariants. `TreeMap` does not replace ordered-set semantics. Implement the machinery from a blank file first; the library is a convenience you earn.
+
+### Rule 11 — Error log every session
+
+`studying/error.log.md`, minimum two lines: what broke, and the root cause or prevention rule. You dictate the content; the coach may type it verbatim but never authors it for you. Procedural records — gate state, rung transitions, reopened prerequisites — are the coach's to write.
 
 ---
 
-## Article IV — Pattern Templates (NeetCode 150 Order)
+## Article IV — The Ladder
 
-These are organized to match NeetCode 150 exactly. Master them in this order.
+The curriculum. Traverse top to bottom at whatever pace you choose. Every stated prerequisite appears earlier. Foundations F00–F05 stay active on every later rung.
+
+**Payload class** marks how many independent evidence units a rung holds — the planning signal that replaces time estimates:
+- **A — Atomic:** one central invariant, one reusable implementation family, one falsification suite.
+- **B — Coupled family:** at most two tightly related variants sharing a proof skeleton, evidenced separately.
+- **C — Synthesis:** combines already-passed rungs; introduces no new primitive.
+
+*Numbering note: IDs are stable. Rungs grafted during convergence carry letter suffixes at their dependency position rather than triggering a renumber.*
+
+### Flight 0 — Algorithmic foundations
+
+- **F00 — Problem contracts and modeling** *(A)*. Converts prose into inputs, outputs, constraints, state, and edge-case obligations, so you are provably solving the right problem. **Prereq:** none.
+- **F01 — Constraints-to-complexity budgeting** *(A)*. Uses input bounds to *reject* impossible approaches before implementation. This is the master key: it turns problem-solving from recall into search-space pruning. **Prereq:** F00.
+- **F02 — Invariants and correctness proofs** *(B)*. Loop invariants, induction, contradiction, exchange, and cut arguments — what lets you justify an algorithm you have never seen. **Prereq:** F00.
+- **F03 — Amortized analysis** *(A)*. Why repeated local work in dynamic arrays, windows, stacks, deques, DSU, and heaps still has a tight global bound. **Prereq:** F01, F02.
+- **F04 — Java contest mechanics and numeric safety** *(B)*. Fast input, primitive arrays, comparators without subtraction, recursion depth, `long`, overflow, output construction. **Prereq:** F00, F01.
+- **F05 — Adversarial testing, naive oracles, differential fuzzing** *(B)*. Turns correctness into an executable claim by generating cases and comparing optimized code against brute force. **Prereq:** F00, F01, F02, F04.
+- **F05a — Diagnosing under uncertainty** *(A)* **[grafted]**. The trained procedure for reasoning when you do not know the answer: formalize → brute-force state → invariant hypothesis → counterexample attack → name the smallest missing fact. Practiced deliberately, not only when stuck. **Prereq:** F00, F02, F05.
+- **F06 — Arrays, strings, matrices, simulation** *(B)*. Indexing, mutation, traversal, representation, and state-machine fluency. **Prereq:** F00, F04, F05.
+
+### Flight 1 — Representation, ordering, preprocessing
+
+- **F07 — Frequency tables and counting domains** *(A)*. **Prereq:** F01, F06.
+- **F08 — Hash sets, maps, grouping, key design** *(B)*. Membership, complement lookup, dedup, canonical grouping, with collision and key-equality assumptions made explicit. **Prereq:** F03, F04, F07.
+- **F09 — Bit representation, masks, subset/submask enumeration** *(B)*. **Prereq:** F01, F04, F06.
+- **F10 — Orders, comparators, stability, tie rules** *(A)*. **Prereq:** F02, F04, F06.
+- **F11 — Elementary sorts from scratch** *(B)*. Insertion and selection are gated evidence; bubble sort is a non-gating contrast. **Prereq:** F01, F02, F10.
+- **F12 — Recursion mechanics, stack safety, explicit-stack conversion** *(B)*. **Prereq:** F01, F02, F04, F06.
+- **F13 — Divide-and-conquer and merge sort** *(B)*. Includes merge-based counting. **Prereq:** F10, F11, F12.
+- **F14 — Partitioning, quicksort, quickselect** *(B)*. **Prereq:** F03, F10, F12, F13.
+- **F15 — Counting, bucket, and radix sorts** *(B)*. **Prereq:** F01, F07, F10, F13.
+- **F16 — Prefix, suffix, bidirectional accumulations** *(A)*. **Prereq:** F02, F06.
+- **F17 — 1-D/2-D prefix sums and prefix XOR** *(B)*. **Prereq:** F04, F09, F16.
+- **F18 — 1-D/2-D difference arrays** *(A)*. **Prereq:** F17.
+- **F19 — Coordinate compression** *(A)*. **Prereq:** F10, F13, F16.
+- **F20 — Offline sorting and event transformation** *(A)*. **Prereq:** F10, F13, F19.
+
+### Flight 2 — Search and linear-scan invariants
+
+- **F21 — Exact binary search** *(A)*. **Prereq:** F02, F10, F13.
+- **F22 — Lower/upper bound, predecessor, successor** *(B)*. One partition-point contract; first/last occurrence are variants, not separate techniques. **Prereq:** F21.
+- **F23 — Binary search on a monotone predicate** *(A)*. Search becomes "find the truth boundary," not "match a value." **Prereq:** F01, F02, F22.
+- **F24 — Answer-space and real-valued binary search** *(B)*. **Prereq:** F04, F23.
+- **F25 — Same-direction pointers and stable compaction** *(A)*. **Prereq:** F02, F06.
+- **F26 — Opposite-end pointers and elimination proofs** *(B)*. **Prereq:** F02, F10, F13, F25.
+- **F27 — Multi-pointer merge, partition, pair counting** *(B)*. Includes Dutch three-way partition. **Prereq:** F14, F25, F26.
+- **F28 — Fixed-size windows** *(A)*. **Prereq:** F03, F07, F16.
+- **F29 — Variable windows with monotone validity** *(B)*. One skeleton; the shrink condition is the only variable. **Prereq:** F03, F08, F28.
+- **F30 — Counting windows and exact-via-at-most transforms** *(B)*. **Prereq:** F02, F29.
+- **F31 — Stack, queue, deque implementations** *(B)*. **Prereq:** F03, F04, F06.
+- **F32 — Parsing and evaluation stacks** *(A)*. **Prereq:** F31.
+- **F33 — Monotonic stacks and boundary ownership** *(B)*. One unresolved-index kernel; value-output and distance-output are variants. **Prereq:** F02, F03, F31.
+- **F34 — Monotonic deques** *(A)*. **Prereq:** F03, F28, F31, F33.
+- **F35 — Greedy proof patterns** *(B)*. Exchange, stay-ahead, cut, prefix-reset, dominance — so greedy is proved, not guessed. **Prereq:** F01, F02, F10.
+- **F36 — Interval normalization, merging, selection** *(B)*. **Prereq:** F20, F26, F35.
+- **F37 — Sweep lines, event ordering, concurrency** *(B)*. **Prereq:** F19, F20, F31, F36.
+- **F38 — Matrix traversals and in-place transformations** *(B)*. **Prereq:** F06, F16.
+- **F39 — Delimiter-safe serialization and manual parsing** *(A)*. **Prereq:** F04, F06.
+
+### Flight 3 — Core data structures
+
+- **F40 — Singly linked-list pointer primitives** *(B)*. **Prereq:** F02, F04.
+- **F41 — Fast/slow pointers and functional cycles** *(B)*. **Prereq:** F02, F25, F40.
+- **F42 — Linked-list composition and segment surgery** *(C)*. **Prereq:** F13, F40, F41.
+- **F43 — Doubly linked lists plus hash indexing** *(C)*. **Prereq:** F08, F40.
+- **F44 — Binary heaps and heap sort from scratch** *(B)*. `siftUp`, `siftDown`, linear heapify, in-place heap sort. **Prereq:** F03, F06, F10, F13.
+- **F45 — Priority-queue selection and top-k maintenance** *(A)*. **Prereq:** F14, F44.
+- **F46 — K-way merge and frontier heaps** *(C)*. **Prereq:** F27, F42, F45.
+- **F47 — Two-heaps and partitioned order statistics** *(A)*. **Prereq:** F04, F45.
+- **F48 — Ordered maps, ordered sets, multiset emulation** *(B)*. Predecessor/successor and dynamic counts that hashing cannot give. **Prereq:** F08, F10, F22.
+- **F49 — Disjoint-set union from scratch** *(B)*. Union-by-size, path compression, amortized proof, component metadata. **Prereq:** F03, F06.
+- **F50 — Fenwick trees** *(B)*. **Prereq:** F09, F17.
+- **F51 — Segment trees** *(B)*. **Prereq:** F02, F12, F17.
+- **F52 — Lazy propagation: range-add/range-sum** *(B)*. **Prereq:** F03, F18, F51.
+- **F52a — Lazy propagation: general tag/action composition** *(B)* **[split]**. **Prereq:** F52.
+- **F53 — Sparse tables and idempotent static queries** *(A)*. **Prereq:** F17, F21.
+- **F54 — Offline query transformation** *(B)*. **Prereq:** F03, F19, F20, F25, F28.
+- **F54a — Mo's algorithm** *(B)* **[split]**. **Prereq:** F54.
+
+### Flight 4 — Recursion, search, binary trees
+
+- **F55 — State-space trees and output-sensitive complexity** *(A)*. Brute force as an explicit decision graph; distinguishes avoidable exponential work from unavoidable output size. **Prereq:** F01, F02, F12.
+- **F56 — Reversible-state backtracking** *(A)*. choose → explore → un-choose, with exact state restoration. **Prereq:** F05, F12, F55.
+- **F57 — Subsets, combinations, permutations, assignment search** *(B)*. **Prereq:** F56.
+- **F58 — Duplicate control, symmetry breaking, safe pruning** *(B)*. **Prereq:** F10, F35, F57.
+- **F59 — Grid and constraint-state backtracking** *(B)*. Path-local marking **and why flood fill marks permanently while path search restores** — the distinction v1.2 left unstated. **Prereq:** F06, F56, F58.
+- **F60 — Binary-tree recursive traversals and structural contracts** *(B)*. **Prereq:** F12, F31.
+- **F61 — Iterative tree traversals and level frontiers** *(B)*. **Prereq:** F31, F60.
+- **F62 — BST invariants and ordered operations** *(B)*. Validation by ancestor-derived bounds. **Prereq:** F22, F60, F61.
+- **F63 — Postorder aggregation and path-state propagation** *(B)*. The asymmetry between what you return upward and what updates the global answer. **Prereq:** F02, F60.
+- **F64 — Tree reconstruction and serialization** *(C)*. **Prereq:** F08, F13, F39, F60, F63.
+- **F65 — One-shot binary-tree LCA** *(A)*. **Prereq:** F60, F63.
+
+### Flight 5 — Dynamic programming as a state graph
+
+- **F66 — State equivalence and the subproblem DAG** *(A)*. The central test: retained state is sufficient only if it completely determines all futures. **Prereq:** F01, F02, F12, F55.
+- **F67 — Top-down memoization** *(A)*. **Prereq:** F08, F12, F66.
+- **F68 — Bottom-up tabulation and dependency order** *(B)*. Loop order derived by topologically ordering state dependencies, not guessed. **Prereq:** F01, F66, F67.
+- **F69 — Witness reconstruction and parent decisions** *(B)*. Return the actual path, subsequence, partition, edit script, or item set — not just a value. **Prereq:** F68.
+- **F70 — Space compression, sentinels, overflow, modular counts** *(B)*. **Prereq:** F04, F68, F69.
+- **F71 — One-dimensional and finite-state DP** *(B)*. **Prereq:** F68, F70.
+- **F72 — Grid and lattice DP** *(B)*. **Prereq:** F17, F68, F70.
+- **F73 — 0/1 knapsack and subset sum** *(B)*. Descending capacity gets a semantic proof, not a memorized direction. **Prereq:** F57, F68, F71.
+- **F74 — Unbounded knapsack** *(A)*. Contrasts ascending capacity with 0/1 semantics. **Prereq:** F73.
+- **F75 — Bounded, grouped, multidimensional knapsack** *(B)*. **Prereq:** F18, F73, F74.
+- **F76 — Sequence DAG DP and quadratic LIS** *(A)*. **Prereq:** F25, F68.
+- **F77 — O(n log n) LIS with reconstruction** *(B)*. **Prereq:** F22, F69, F76.
+- **F78 — String-prefix and two-sequence DP** *(B)*. **Prereq:** F39, F68, F69.
+- **F79 — Interval and split-point DP** *(B)*. **Prereq:** F13, F36, F68.
+- **F80 — Bitmask DP** *(B)*. **Prereq:** F09, F57, F68.
+- **F80a — SOS and profile DP** *(B)* **[split]**. **Prereq:** F80.
+- **F81 — Digit and automaton DP** *(B)*. **Prereq:** F67, F70, F78, F80.
+- **F82 — Greedy frontiers and local restarts** *(B)*. Reachability, minimum frontier layers, Kadane reset, prefix resets — each with a named proof. **Prereq:** F16, F35, F71.
+- **F83 — Sort-and-heap greedy scheduling** *(B)*. **Prereq:** F35, F36, F45, F48.
+
+### Flight 6 — Graphs and competitive trees
+
+- **F84 — Graph modeling, representations, reductions** *(B)*. Includes recognizing that a story with no graph in it is a graph problem. **Prereq:** F00, F04, F06, F08, F31.
+- **F85 — DFS, BFS, path reconstruction** *(B)*. **Prereq:** F05, F12, F31, F69, F84.
+- **F86 — Grid, implicit, and state-expanded graphs** *(B)*. **Prereq:** F06, F59, F85.
+- **F87 — Components, undirected cycles, bipartite checking** *(B)*. **Prereq:** F85.
+- **F88 — Directed cycles and topological ordering** *(B)*. Three-color DFS and Kahn indegrees. **Prereq:** F85.
+- **F89 — DAG dynamic programming** *(B)*. **Prereq:** F68, F69, F88.
+- **F90 — Multi-source and layered BFS** *(B)*. **Prereq:** F85, F86.
+- **F91 — 0–1 BFS** *(A)*. **Prereq:** F34, F84, F90.
+- **F92 — Dijkstra and best-first shortest paths** *(B)*. Settled-distance and stale-entry invariants; nonnegative-edge contract stated. **Prereq:** F04, F35, F45, F84, F85.
+- **F93 — Bellman–Ford and negative-cycle detection** *(B)*. Includes the bounded-relaxation form that "at most K stops" actually requires. **Prereq:** F01, F02, F67, F84.
+- **F94 — Floyd–Warshall and transitive closure** *(A)*. **Prereq:** F04, F68, F84.
+- **F95 — Resource-expanded shortest paths** *(B)*. **Prereq:** F66, F86, F91, F92, F93.
+- **F95a — Minimax/bottleneck path algebra** *(B)* **[split]**. **Prereq:** F95.
+- **F96 — Minimum spanning trees** *(B)*. Kruskal and Prim with cut/exchange proofs. **Prereq:** F35, F45, F49, F84.
+- **F97 — Strongly connected components and condensation DAGs** *(B)*. **Prereq:** F85, F88, F89.
+- **F98 — Low-link bridges and articulation points** *(B)*. **Prereq:** F02, F85.
+- **F99 — Eulerian trails and Hierholzer** *(B)*. **Prereq:** F31, F48, F84, F85.
+- **F100 — Rooted-tree metadata and Euler flattening** *(B)*. **Prereq:** F61, F84, F85.
+- **F101 — Binary lifting, repeated LCA, tree distance** *(B)*. **Prereq:** F09, F65, F100.
+- **F102 — Tree DP and rerooting** *(B)*. **Prereq:** F68, F69, F73, F100.
+- **F103 — Functional graphs** *(B)*. **Prereq:** F41, F88, F101.
+- **F104 — Heavy-light decomposition** *(C)*. **Prereq:** F51, F52, F100, F101.
+- **F105 — Max flow and min cut** *(B)*. **Prereq:** F31, F84, F85, F90.
+- **F106 — Bipartite matching and matching reductions** *(B)*. **Prereq:** F87, F105.
+
+### Flight 7 — Number theory, strings, geometry, composition
+
+- **F107 — Euclid, GCD/LCM, divisors, normalized ratios** *(A)*. **Prereq:** F01, F02, F04.
+- **F108 — Extended Euclid, modular inverses, linear congruences, CRT** *(B)*. **Prereq:** F107.
+- **F109 — Modular arithmetic and binary exponentiation** *(B)*. Every counting answer ends `mod 1e9+7`; this is where that stops being magic. **Prereq:** F04, F09, F108.
+- **F110 — Sieve, SPF tables, factorization, divisors, Euler phi** *(B)*. **Prereq:** F06, F107.
+- **F111 — Modular combinatorics** *(B)*. Factorial/inverse-factorial nCk. **Prereq:** F67, F109, F110.
+- **F111a — Inclusion–exclusion** *(B)* **[split]**. **Prereq:** F111.
+- **F112 — Matrix multiplication and exponentiation** *(B)*. **Prereq:** F38, F71, F109.
+- **F113 — Probability and expectation** *(B)*. Indicator variables and expected-value DP. **Prereq:** F01, F68, F111.
+- **F114 — Finite games and minimax** *(B)*. **Prereq:** F09, F89, F107.
+- **F114a — Nim and impartial-game XOR** *(B)* **[split]**. **Prereq:** F114.
+- **F115 — String structure, alphabets, borders, periods** *(B)*. **Prereq:** F07, F08, F13, F16, F39.
+- **F116 — Tries and prefix-state dictionaries** *(B)*. Wildcard traversal, counts, deletion, subtrie enumeration. **Prereq:** F08, F60, F115.
+- **F117 — Prefix function/KMP and Z algorithm** *(B)*. **Prereq:** F16, F22, F115.
+- **F118 — Rolling hashes and substring fingerprints** *(B)*. With explicit collision mitigation — a single hash is never proof of equality. **Prereq:** F17, F109, F115.
+- **F119 — Palindrome methods: center expansion and DP** *(B)*. **Prereq:** F78, F79, F117, F118.
+- **F119a — Manacher** *(B)* **[split]**. **Prereq:** F119.
+- **F120 — Aho–Corasick multi-pattern matching** *(C)*. **Prereq:** F85, F116, F117.
+- **F121 — Suffix arrays and LCP** *(B)*. **Prereq:** F13, F19, F22, F115, F117.
+- **F122 — Exact point/vector geometry** *(B)*. Orientation, cross products, GCD-normalized directions — and why floating-point slopes are a bug. **Prereq:** F04, F10, F107.
+- **F123 — Lines, segments, polygons** *(B)*. **Prereq:** F20, F37, F122.
+- **F123a — Convex hull and rotating calipers** *(B)* **[split]**. **Prereq:** F123.
+- **F124 — Meet-in-the-middle** *(B)*. **Prereq:** F08, F09, F14, F22, F57.
+- **F125 — Problem reduction** *(B)* **[split, grafted]**. Recognizing that an unfamiliar problem *is* a known one under a mapping — the highest-leverage competitive skill. Name the canonical target and state the mapping. **Prereq:** F00–F124.
+- **F125a — Technique composition** *(C)*. Deliberately chaining independently mastered invariants — Euler tour plus Fenwick, trie plus search, sort plus heap plus sweep. Name the chain before coding. **Prereq:** F125.
+- **F125b — Construction mode** *(B)* **[grafted]**. "Output any X such that…" — building from an invariant instead of searching for an answer. A stance interview lists almost never train and contests demand constantly. **Prereq:** F02, F35, F125.
+- **F126 — Blind mixed transfer** *(C)*. The terminal rung. Certified only by the frozen assessment in Article VIII. **Prereq:** F125b.
+
+### Named frontier — X01–X12 (non-gating)
+
+These do not block F126. Pull one in only when a demonstrated target needs it.
+
+- **X01 — Augmented randomized BST/treap.** **Prereq:** F03, F14, F48, F62.
+- **X02 — Rollback DSU and offline dynamic connectivity.** **Prereq:** F49, F51, F54, F97.
+- **X03 — Persistent segment trees.** **Prereq:** F19, F51, F69.
+- **X04 — Small-to-large merging and centroid decomposition.** **Prereq:** F13, F48, F100, F102.
+- **X05 — Min-cost flow and advanced matching.** **Prereq:** F92, F105, F106, F109.
+- **X06 — Suffix automata.** **Prereq:** F120, F121.
+- **X07 — Advanced DP optimizations** (monotone deque, divide-and-conquer, Knuth, convex hull, Li Chao). **Prereq:** F34, F48, F79, F80, F109.
+- **X08 — Advanced computational geometry.** **Prereq:** F37, F48, F123.
+- **X09 — FFT/NTT and polynomial algorithms.** **Prereq:** F13, F109, F111.
+- **X10 — Advanced randomized/offline techniques.** **Prereq:** F05, F14, F24, F54.
+- **X11 — 2-SAT through implication graphs.** **Prereq:** F97.
+- **X12 — Binary tries and XOR optimization.** **Prereq:** F09, F116.
 
 ---
 
-# CATEGORY 1: ARRAYS & HASHING
+## Article V — Session Protocol
+
+A session has a **shape**, not a duration. Learning Mode carries no clock (Rule 1).
+
+1. **Orient.** Read the current rung, its open gates, and any reopened prerequisite.
+2. **Derive.** Model the contract and constraints, produce the brute force, state the invariant or recurrence, budget the complexity. (Rule 3)
+3. **Implement cold.** Blank file, no autocomplete, no reference. Trace by hand before running. (Rules 2, 4)
+4. **Falsify.** Adversarial cases, and where feasible a naive oracle plus a randomized generator; isolate any mismatch to a minimal counterexample. (F05)
+5. **Redo.** Delete and reconstruct from the model and invariant. (Rule 6)
+6. **Log.** Two lines minimum: what broke, root cause. (Rule 11)
+
+Stop whenever you choose. A session that covers only step 2 is a legitimate session.
+
+### The eight mastery gates
+
+A rung is **done** only when every gate has independently observed evidence. Passing is binary. Confidence, familiarity, copied code, and recognition of a known statement are not evidence.
+
+1. **Model** — from an unlabeled prompt, formalize state, operations, constraints, output contract, and the simplest correct brute force *before* naming the technique.
+2. **Applicability** — state the exact preconditions that make the technique valid, and construct a counterexample where a tempting use of it fails.
+3. **Derivation** — recover the invariant, recurrence, structure algebra, or greedy choice from first principles, with a correctness argument.
+4. **Cold Java** — implement the reusable primitive from a blank file, no reference, no autocomplete; trace manually before running.
+5. **Bounds and safety** — derive preprocessing, update, query, total time, auxiliary space, recursion depth, amortized behavior, and numeric risks from your own implementation.
+6. **Adversarial verification** — boundary cases plus, where feasible, a naive oracle and randomized generator; isolate mismatches minimally.
+7. **Blind transfer** — solve an unfamiliar variation, without being told the rung, and explain why the nearest plausible alternative technique does not fit.
+8. **Reconstruction** — delete the accepted implementation and recover it from model and invariant, not visual memory.
+
+If help is required on a gate, that gate stays open; independent evidence on other gates is preserved.
 
 ---
 
-### 1.1 Array — Contains Duplicate (HashSet)
+## Article VI — Progress
+
+There is **no percentage, no completion estimate, and no elapsed-time metric** in this program by design. A raw count like "30 of 127" is misleading because rung payloads differ, and any duration figure manufactures a failure condition the work itself does not have.
+
+Progress is reported as exactly four things: **capability receipts earned**, **rungs unlocked**, **gate evidence observed**, and **failure modes repaired**.
+
+### State record
+
+```text
+current_rung:      Fxx — name
+payload_class:     A | B | C
+prerequisites:     passed | repair-needed (name which)
+open_gates:        [model, applicability, derivation, cold_java, bounds, verification, transfer, reconstruction]
+failure_evidence:  concrete counterexample or implementation defect
+transfer_evidence: unfamiliar task, and why the technique fit
+next_action:       smallest open gate, or prerequisite repair
+```
+
+No pace field. No phase field. No quota.
+
+### Capability receipts
+
+Non-gating. Each reports what was observed and what remains out of scope. None predicts an employment outcome.
+
+| Receipt | Closure | Permitted claim |
+|---|---|---|
+| Derivation foundation | F00–F06 | Can model, budget, prove, implement safely, and falsify foundational algorithms under the gate rubric. |
+| Linear algorithms | F07–F39 | Transfer demonstrated across ordering, search, pointers, windows, stacks/deques, greedy foundations, intervals, matrix simulation. |
+| Mutable structures | F40–F49 | Linked structures, heaps, ordered state, DSU. |
+| Range/offline structures | F50–F54a | Operation-mix selection for dynamic and offline range queries. |
+| Recursion and binary trees | F55–F65 | State-space search and binary-tree reasoning. |
+| Dynamic programming and greedy | F66–F83 | State formulation, reconstruction, the listed DP families, greedy frontiers and scheduling. |
+| Graph foundations | F84–F96 | Graph modeling, traversal, shortest-path selection, MST. |
+| Advanced graph/tree | F97–F106 | The listed structural graph and competitive-tree machinery. |
+| Contest math/string/geometry | F107–F124 | Transfer within the listed number, string, geometry, game, and meet-in-the-middle families. |
+| Mixed-core transfer | F125–F126 | Passed the frozen assessment in Article VIII. |
+
+Benchmark results are reported only under frozen conditions — "5/6 clean passes under the stated benchmark" — never as "FAANG-ready."
+
+---
+
+## Article VII — Recovery and Uncertainty
+
+### The uncertainty-diagnosis chain *(this is rung F05a; practice it deliberately, not only when stuck)*
+
+1. Stop implementing.
+2. Restate the contract and constraints in plain English.
+3. Derive the brute-force state — what would a correct, stupid solution track?
+4. State an invariant or recurrence **hypothesis**.
+5. Attack the hypothesis with counterexamples.
+6. Name the **smallest missing fact** that blocks you.
+
+Only then does recovery permit **one approach-only hint**, which you implement yourself. Solution study follows only if that fails (Rule 5), and leaves Cold Java, Blind Transfer, and Reconstruction open (Rule 7).
+
+### When burned out
+
+Full stop for at least a day. Physical activity. Return gently — a short orienting session first, a normal one after. There is no penalty and no lost ground; the ladder does not expire.
+
+---
+
+## Article VIII — Terminal Assessment
+
+Replaces the deleted weekly curriculum. Certifies rung F126 and nothing else.
+
+1. **Freeze twelve unlabeled, previously unseen tasks before assessment** — two from each domain: linear/order/search/greedy; data structures and range queries; recursion/DP; graphs/trees; math/strings/geometry; reduction/composition/construction.
+2. At least six require two or more mastered rungs. At least three contain a plausible but **invalid** technique choice. At least two require a **witness or construction**, not just a value.
+3. Statements you have already seen are ineligible. Declare recognition before working; the task is replaced without penalty.
+4. No tags, technique labels, hints, recovery, reference implementations, or external solution material may contribute to a pass.
+5. A task passes only if you record the model, constraints, and brute baseline; select **and defend** the technique; **reject the nearest plausible alternative**; produce cold Java that passes hidden tests; give a valid correctness and bounds argument; and supply adversarial tests.
+6. **Pass at 10 of 12 or better**, with at least one success in every domain, at least five successful multi-rung compositions, and clean reconstruction of three randomly selected passed solutions.
+7. On failure: trace each failure to its prerequisite gate, repair, and reassess with an entirely new frozen batch. Never replace failed tasks after seeing results.
+
+Record for each: prompt identifier, unfamiliarity declaration, initial model, selected and rejected techniques, implementation hash, judge result, proof and bounds result, assistance count.
+
+This is a certification instrument, not a practice quota. It has **no elapsed-time criterion**. Passing means broad mixed transfer across the v1.3 core under this rubric — interview speed is a separate Benchmark result.
+
+---
+
+## Appendix A — Java Reference
+
+*(Convenience only. Rule 10: implement the machinery before you use the library.)*
+
+```java
+// Maps and sets
+Map<K,V> map = new HashMap<>();
+map.getOrDefault(key, def); map.merge(key, 1, Integer::sum);
+Set<T> set = new HashSet<>();
+
+// Ordered structures — predecessor/successor, unavailable from hashing
+TreeMap<K,V> tm = new TreeMap<>();
+tm.floorKey(k); tm.ceilingKey(k); tm.lowerKey(k); tm.higherKey(k); tm.firstKey(); tm.lastKey();
+
+// Deque as stack AND queue
+Deque<T> dq = new ArrayDeque<>();
+dq.push(x); dq.pop(); dq.peek();              // stack
+dq.offerLast(x); dq.pollFirst(); dq.peekFirst(); dq.peekLast();  // queue / monotonic deque
+
+// Heap
+PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Comparator.reverseOrder());
+
+// COMPARATORS: never subtract — it overflows and silently inverts the order.
+// WRONG: (a, b) -> a[0] - b[0]          // Integer.MAX_VALUE - (-1) wraps negative
+// RIGHT:
+PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> Integer.compare(a[0], b[0]));
+Arrays.sort(arr, (a, b) -> Integer.compare(a[0], b[0]));
+Comparator<int[]> byFirstThenSecond =
+    Comparator.<int[]>comparingInt(a -> a[0]).thenComparingInt(a -> a[1]);
+
+// Boxed equality: == compares references outside the -128..127 cache.
+// WRONG: boxedA != boxedB      RIGHT: !boxedA.equals(boxedB)
+
+// Numeric safety
+long sum = 0;                       // accumulate in long, not int
+int mid = lo + (hi - lo) / 2;       // never (lo + hi) / 2
+double avg = (a + (long) b) / 2.0;  // widen before adding
+static final int MOD = 1_000_000_007;
+
+// Recursion depth: default stack ~10^4 frames. Deep recursion → explicit stack (F12).
+```
+
+## Appendix B — Constraint Index
+
+The entry point. Read the constraints first, land on a rung, then open the ladder. *(This replaces the old keyword cheat sheet; it keys on constraints, not on problem phrasing, because keying on phrasing is what builds a recognition list.)*
+
+| Constraint / signal | Budget implied | Land on |
+|---|---|---|
+| n ≤ 20 | exponential OK | F57, F80, F124 |
+| n ≤ 100 | O(n³) | F94, F79 |
+| n ≤ 2,000 | O(n²) | F76, F78, F72 |
+| n ≤ 2·10⁵ | O(n log n) | F13, F22, F29, F33, F92 |
+| n ≤ 10⁶ | O(n) or O(n log log n) | F16, F25, F110 |
+| n ≤ 10¹⁸ | O(log n) | F23, F109, F112 |
+| "count the ways", answer huge | modular counting | F109, F111 |
+| "minimum/maximum X such that…" | monotone predicate | F23, F24 |
+| range queries, static | precompute | F17, F53 |
+| range queries + updates | dynamic structure | F50, F51, F52 |
+| "output any valid X" | construction, not search | F125b |
+| contiguous subarray/substring | window or prefix | F28, F29, F17 |
+| subarray sum with negatives | prefix + hash (window fails) | F17, F08 |
+| next/previous greater, spans | monotonic stack | F33 |
+| window extremum | monotonic deque | F34 |
+| shortest path, unweighted | BFS | F85, F90 |
+| shortest path, weights {0,1} | 0–1 BFS | F91 |
+| shortest path, nonnegative | Dijkstra | F92 |
+| shortest path, negative or ≤K edges | Bellman–Ford | F93 |
+| dependencies / ordering | topological | F88, F89 |
+| connectivity, incremental | DSU | F49 |
+| "problem says nothing about graphs" | model it as one | F84, F86 |
+| unfamiliar and nothing fits | reduce it | F125, F05a |
+
+## Appendix C — Template Library
+
+Reference implementations, each tagged with its destination rung. **These are proof artifacts, not curriculum** — a rung is passed by deriving and implementing from a blank file (gates 4 and 8), never by copying from here. Consult only after your own attempt, or during sanctioned solution study (Rule 5).
+
+Every defect found in the v1.2 audit is corrected below and marked `[FIXED v1.3]`.
+
+### Library 1 — ARRAYS & HASHING
+
+---
+
+#### 1.1 Array — Contains Duplicate (HashSet)
+
+> **Rung:** F08 · evidence exercise
 
 **Use when:** Check for duplicates, track seen elements
 
@@ -195,7 +559,9 @@ public boolean containsDuplicate(int[] nums) {
 
 ---
 
-### 1.2 Array — Two Sum (HashMap Index Lookup)
+#### 1.2 Array — Two Sum (HashMap Index Lookup)
+
+> **Rung:** F08 · evidence exercise
 
 **Use when:** Find pair that satisfies condition, need to return indices
 
@@ -226,7 +592,9 @@ public int[] twoSum(int[] nums, int target) {
 
 ---
 
-### 1.3 Array — Frequency Count (HashMap)
+#### 1.3 Array — Frequency Count (HashMap)
+
+> **Rung:** F07 + F08 · evidence exercise
 
 **Use when:** Count occurrences, find most/least frequent, anagram problems
 
@@ -263,7 +631,9 @@ public int[] frequencyCountArray(String s) {
 
 ---
 
-### 1.4 Array — Group By Key (HashMap with List)
+#### 1.4 Array — Group By Key (HashMap with List)
+
+> **Rung:** F08 + F10 · evidence exercise
 
 **Use when:** Group anagrams, group by category
 
@@ -297,7 +667,9 @@ public List<List<String>> groupAnagrams(String[] strs) {
 
 ---
 
-### 1.5 Array — Product Except Self (Prefix/Suffix)
+#### 1.5 Array — Product Except Self (Prefix/Suffix)
+
+> **Rung:** F16 · evidence exercise
 
 **Use when:** Calculate something for each element based on rest of array
 
@@ -332,7 +704,9 @@ public int[] productExceptSelf(int[] nums) {
 
 ---
 
-### 1.6 Array — Encode/Decode Strings
+#### 1.6 Array — Encode/Decode Strings
+
+> **Rung:** F39 · evidence exercise
 
 **Use when:** Serialize list of strings, handle delimiters
 
@@ -377,7 +751,9 @@ public List<String> decode(String str) {
 
 ---
 
-### 1.7 Array — Longest Consecutive Sequence (HashSet)
+#### 1.7 Array — Longest Consecutive Sequence (HashSet)
+
+> **Rung:** F08 · evidence exercise
 
 **Use when:** Find longest consecutive sequence, O(n) required
 
@@ -416,24 +792,14 @@ public int longestConsecutive(int[] nums) {
 - Not checking `!set.contains(num - 1)` (makes it O(n²))
 - Using nums array instead of set in inner loop
 
-### 📅 CATEGORY 1 — DAILY BREAKDOWN
 
-| Day | Template (5x typing)                           | LeetCode Problems                                | Focus                            |
-| --- | ---------------------------------------------- | ------------------------------------------------ | -------------------------------- |
-| Mon | 1.1 HashSet                                    | LC 217 Contains Duplicate, LC 242 Valid Anagram  | HashSet for O(1) lookup          |
-| Tue | 1.2 Two Sum HashMap                            | LC 1 Two Sum, LC 219 Contains Duplicate II       | value→index mapping              |
-| Wed | 1.3 Frequency Count                            | LC 49 Group Anagrams, LC 347 Top K Frequent      | getOrDefault pattern             |
-| Thu | 1.4 Group By Key + 1.5 Prefix/Suffix (3x each) | LC 238 Product Except Self, LC 271 Encode/Decode | HashMap with List, prefix/suffix |
-| Fri | 1.6 + 1.7 (3x each)                            | LC 128 Longest Consecutive Sequence              | Sequence start detection         |
-| Sat | **REVIEW**: All templates 1x each              | Redo hardest problem from each day               | Consolidation                    |
+### Library 2 — TWO POINTERS
 
 ---
 
-# CATEGORY 2: TWO POINTERS
+#### 2.1 Two Pointers — Opposite Ends (Sorted Array)
 
----
-
-### 2.1 Two Pointers — Opposite Ends (Sorted Array)
+> **Rung:** F26 · evidence exercise
 
 **Use when:** Sorted array, find pair with target sum, container problems
 
@@ -467,7 +833,9 @@ public int[] twoPointerOpposite(int[] nums, int target) {
 
 ---
 
-### 2.2 Two Pointers — 3Sum (Skip Duplicates)
+#### 2.2 Two Pointers — 3Sum (Skip Duplicates)
+
+> **Rung:** F27 · evidence exercise
 
 **Use when:** Find triplets, must avoid duplicate results
 
@@ -520,7 +888,9 @@ public List<List<Integer>> threeSum(int[] nums) {
 
 ---
 
-### 2.3 Two Pointers — Container With Most Water
+#### 2.3 Two Pointers — Container With Most Water
+
+> **Rung:** F26 + F35 · evidence exercise
 
 **Use when:** Maximize area/product with two boundaries
 
@@ -557,7 +927,9 @@ public int maxArea(int[] height) {
 
 ---
 
-### 2.4 Two Pointers — Same Direction (Fast/Slow)
+#### 2.4 Two Pointers — Same Direction (Fast/Slow)
+
+> **Rung:** F25 · evidence exercise
 
 **Use when:** Remove duplicates, partition array
 
@@ -587,7 +959,9 @@ public int removeDuplicates(int[] nums) {
 
 ---
 
-### 2.5 Two Pointers — Trapping Rain Water
+#### 2.5 Two Pointers — Trapping Rain Water
+
+> **Rung:** F16 + F26 · evidence exercise
 
 **Use when:** Calculate trapped water/area between bars
 
@@ -630,29 +1004,20 @@ public int trap(int[] height) {
 - Logic for when to add water vs update max
 - Processing wrong side
 
-### 📅 CATEGORY 2 — DAILY BREAKDOWN
 
-| Day | Template (5x typing)              | LeetCode Problems                           | Focus                             |
-| --- | --------------------------------- | ------------------------------------------- | --------------------------------- |
-| Mon | 2.1 Opposite Ends                 | LC 167 Two Sum II, LC 125 Valid Palindrome  | left < right loop                 |
-| Tue | 2.2 3Sum                          | LC 15 3Sum                                  | Duplicate skipping                |
-| Wed | 2.3 Container                     | LC 11 Container With Most Water             | Move shorter side                 |
-| Thu | 2.4 Fast/Slow                     | LC 26 Remove Duplicates, LC 283 Move Zeroes | Slow/fast pointers same direction |
-| Fri | 2.5 Trapping Rain Water           | LC 42 Trapping Rain Water                   | leftMax/rightMax tracking         |
-| Sat | **REVIEW**: All templates 1x each | Redo hardest from each day                  | Consolidation                     |
+### Library 3 — SLIDING WINDOW
 
 ---
 
-# CATEGORY 3: SLIDING WINDOW
+#### 3.1 Sliding Window — Fixed Size
 
----
-
-### 3.1 Sliding Window — Fixed Size
+> **Rung:** F28 · evidence exercise
 
 **Use when:** Maximum sum of k elements, any fixed-width window
 
 ```java
 public int maxSumFixedWindow(int[] nums, int k) {
+    if (nums == null || nums.length < k) return 0; // [FIXED v1.3] guard k > n
     // Build initial window
     int windowSum = 0;
     for (int i = 0; i < k; i++) {
@@ -679,7 +1044,9 @@ public int maxSumFixedWindow(int[] nums, int k) {
 
 ---
 
-### 3.2 Sliding Window — Variable Size (Minimum)
+#### 3.2 Sliding Window — Variable Size (Minimum)
+
+> **Rung:** F29 · evidence exercise
 
 **Use when:** Minimum subarray with condition
 
@@ -715,7 +1082,9 @@ public int minSubArrayLen(int target, int[] nums) {
 
 ---
 
-### 3.3 Sliding Window — Variable Size (Maximum)
+#### 3.3 Sliding Window — Variable Size (Maximum)
+
+> **Rung:** F29 + F30 · evidence exercise
 
 **Use when:** Longest substring without repeating characters
 
@@ -754,7 +1123,9 @@ public int lengthOfLongestSubstring(String s) {
 
 ---
 
-### 3.4 Sliding Window — Character Replacement
+#### 3.4 Sliding Window — Character Replacement
+
+> **Rung:** F29 · evidence exercise
 
 **Use when:** Longest repeating character replacement with k changes
 
@@ -792,7 +1163,9 @@ public int characterReplacement(String s, int k) {
 
 ---
 
-### 3.5 Sliding Window — Minimum Window Substring
+#### 3.5 Sliding Window — Minimum Window Substring
+
+> **Rung:** F30 · evidence exercise
 
 **Use when:** Find smallest window containing all characters
 
@@ -853,7 +1226,9 @@ public String minWindow(String s, String t) {
 
 ---
 
-### 3.6 Sliding Window — Permutation in String
+#### 3.6 Sliding Window — Permutation in String
+
+> **Rung:** F28 + F30 · evidence exercise
 
 **Use when:** Check if any permutation of pattern exists in string
 
@@ -896,24 +1271,14 @@ public boolean checkInclusion(String s1, String s2) {
 - Not handling window size correctly
 - Expensive array comparison (can optimize with matches counter)
 
-### 📅 CATEGORY 3 — DAILY BREAKDOWN
 
-| Day | Template (5x typing)              | LeetCode Problems                                           | Focus                       |
-| --- | --------------------------------- | ----------------------------------------------------------- | --------------------------- |
-| Mon | 3.1 Fixed Size                    | LC 643 Max Average Subarray I, LC 567 Permutation in String | Build initial window, slide |
-| Tue | 3.2 Variable Min                  | LC 209 Min Size Subarray Sum                                | Shrink while valid          |
-| Wed | 3.3 Variable Max                  | LC 3 Longest Substring Without Repeating                    | Shrink while invalid        |
-| Thu | 3.4 Character Replacement         | LC 424 Longest Repeating Character Replacement              | maxFreq tracking            |
-| Fri | 3.5 Min Window Substring          | LC 76 Minimum Window Substring                              | have/required pattern       |
-| Sat | **REVIEW**: All templates 1x each | Redo hardest from each day                                  | Consolidation               |
+### Library 4 — STACK
 
 ---
 
-# CATEGORY 4: STACK
+#### 4.1 Stack — Valid Parentheses
 
----
-
-### 4.1 Stack — Valid Parentheses
+> **Rung:** F32 · evidence exercise
 
 **Use when:** Matching brackets, valid expressions
 
@@ -929,7 +1294,8 @@ public boolean isValid(String s) {
     for (char c : s.toCharArray()) {
         if (pairs.containsKey(c)) {
             // Closing bracket
-            if (stack.isEmpty() || stack.pop() != pairs.get(c)) {
+            // [FIXED v1.3] != compares Character REFERENCES; worked only via the -128..127 cache
+            if (stack.isEmpty() || !stack.pop().equals(pairs.get(c))) {
                 return false;
             }
         } else {
@@ -951,7 +1317,9 @@ public boolean isValid(String s) {
 
 ---
 
-### 4.2 Stack — Monotonic Stack (Next Greater Element)
+#### 4.2 Stack — Monotonic Stack (Next Greater Element)
+
+> **Rung:** F33 · evidence exercise
 
 **Use when:** Next greater/smaller element, daily temperatures
 
@@ -985,7 +1353,9 @@ public int[] nextGreaterElement(int[] nums) {
 
 ---
 
-### 4.3 Stack — Evaluate Reverse Polish Notation
+#### 4.3 Stack — Evaluate Reverse Polish Notation
+
+> **Rung:** F32 · evidence exercise
 
 **Use when:** Evaluate postfix expressions
 
@@ -1031,7 +1401,9 @@ private int calculate(int a, int b, String op) {
 
 ---
 
-### 4.4 Stack — Daily Temperatures
+#### 4.4 Stack — Daily Temperatures
+
+> **Rung:** F33 · evidence exercise
 
 **Use when:** Find days until warmer temperature
 
@@ -1062,7 +1434,9 @@ public int[] dailyTemperatures(int[] temperatures) {
 
 ---
 
-### 4.5 Stack — Largest Rectangle in Histogram
+#### 4.5 Stack — Largest Rectangle in Histogram
+
+> **Rung:** F33 · evidence exercise
 
 **Use when:** Find largest rectangle in bar chart
 
@@ -1095,24 +1469,14 @@ public int largestRectangleArea(int[] heights) {
 - Not handling the final "flush" (i == n with h = 0)
 - Width calculation when stack is empty
 
-### 📅 CATEGORY 4 — DAILY BREAKDOWN
 
-| Day | Template (5x typing)              | LeetCode Problems                       | Focus                       |
-| --- | --------------------------------- | --------------------------------------- | --------------------------- |
-| Mon | 4.1 Valid Parentheses             | LC 20 Valid Parentheses                 | Stack for matching          |
-| Tue | 4.2 Monotonic Stack               | LC 496 Next Greater Element I           | Store indices, not values   |
-| Wed | 4.3 RPN                           | LC 150 Evaluate Reverse Polish Notation | Operand order (b before a)  |
-| Thu | 4.4 Daily Temperatures            | LC 739 Daily Temperatures               | Index difference, not value |
-| Fri | 4.5 Largest Rectangle             | LC 84 Largest Rectangle in Histogram    | Final flush with h=0        |
-| Sat | **REVIEW**: All templates 1x each | Redo hardest from each day              | Consolidation               |
+### Library 5 — BINARY SEARCH
 
 ---
 
-# CATEGORY 5: BINARY SEARCH
+#### 5.1 Binary Search — Standard (Find Target)
 
----
-
-### 5.1 Binary Search — Standard (Find Target)
+> **Rung:** F21 · evidence exercise
 
 **Use when:** Find exact target in sorted array
 
@@ -1147,7 +1511,9 @@ public int binarySearch(int[] nums, int target) {
 
 ---
 
-### 5.2 Binary Search — Left Bound (First Occurrence)
+#### 5.2 Binary Search — Left Bound (First Occurrence)
+
+> **Rung:** F22 · evidence exercise
 
 **Use when:** Find first position of target, insertion point
 
@@ -1180,7 +1546,9 @@ public int binarySearchLeft(int[] nums, int target) {
 
 ---
 
-### 5.3 Binary Search — Right Bound (Last Occurrence)
+#### 5.3 Binary Search — Right Bound (Last Occurrence)
+
+> **Rung:** F22 · evidence exercise
 
 **Use when:** Find last position of target
 
@@ -1210,7 +1578,9 @@ public int binarySearchRight(int[] nums, int target) {
 
 ---
 
-### 5.4 Binary Search — Search in Rotated Sorted Array
+#### 5.4 Binary Search — Search in Rotated Sorted Array
+
+> **Rung:** F23 · evidence exercise
 
 **Use when:** Array is sorted but rotated
 
@@ -1257,7 +1627,9 @@ public int searchRotated(int[] nums, int target) {
 
 ---
 
-### 5.5 Binary Search — Find Minimum in Rotated Array
+#### 5.5 Binary Search — Find Minimum in Rotated Array
+
+> **Rung:** F23 · evidence exercise
 
 **Use when:** Find pivot point in rotated array
 
@@ -1291,7 +1663,9 @@ public int findMin(int[] nums) {
 
 ---
 
-### 5.6 Binary Search — On Answer (Koko Eating Bananas)
+#### 5.6 Binary Search — On Answer (Koko Eating Bananas)
+
+> **Rung:** F24 · evidence exercise
 
 **Use when:** Find minimum/maximum value that satisfies condition
 
@@ -1314,7 +1688,7 @@ public int minEatingSpeed(int[] piles, int h) {
 }
 
 private boolean canFinish(int[] piles, int speed, int h) {
-    int hours = 0;
+    long hours = 0; // [FIXED v1.3] int overflows: 10^4 piles x 10^9 at speed 2500 = 4e9 hours
     for (int pile : piles) {
         hours += (pile + speed - 1) / speed; // Ceiling division
     }
@@ -1329,24 +1703,14 @@ private boolean canFinish(int[] piles, int speed, int h) {
 - Wrong search space bounds
 - Ceiling division formula: `(a + b - 1) / b`
 
-### 📅 CATEGORY 5 — DAILY BREAKDOWN
 
-| Day | Template (5x typing)                       | LeetCode Problems                    | Focus                             |
-| --- | ------------------------------------------ | ------------------------------------ | --------------------------------- |
-| Mon | 5.1 Standard                               | LC 704 Binary Search                 | left <= right, mid +/- 1          |
-| Tue | 5.2 Left Bound + 5.3 Right Bound (3x each) | LC 34 Find First and Last Position   | left < right, different templates |
-| Wed | 5.4 Rotated Array                          | LC 33 Search in Rotated Sorted Array | Which half is sorted              |
-| Thu | 5.5 Find Min Rotated                       | LC 153 Find Minimum in Rotated Array | Compare with nums[right]          |
-| Fri | 5.6 Binary Search on Answer                | LC 875 Koko Eating Bananas           | Ceiling division formula          |
-| Sat | **REVIEW**: All templates 1x each          | Redo hardest from each day           | Consolidation                     |
+### Library 6 — LINKED LIST
 
 ---
 
-# CATEGORY 6: LINKED LIST
+#### 6.1 Linked List — Reverse
 
----
-
-### 6.1 Linked List — Reverse
+> **Rung:** F40 · evidence exercise
 
 **Use when:** Reverse entire list or portion
 
@@ -1375,7 +1739,9 @@ public ListNode reverseList(ListNode head) {
 
 ---
 
-### 6.2 Linked List — Fast/Slow Pointers (Cycle Detection)
+#### 6.2 Linked List — Fast/Slow Pointers (Cycle Detection)
+
+> **Rung:** F41 · evidence exercise
 
 **Use when:** Detect cycle, find middle
 
@@ -1421,7 +1787,9 @@ public ListNode findMiddle(ListNode head) {
 
 ---
 
-### 6.3 Linked List — Merge Two Sorted Lists
+#### 6.3 Linked List — Merge Two Sorted Lists
+
+> **Rung:** F42 · evidence exercise
 
 **Use when:** Merge sorted lists
 
@@ -1457,7 +1825,9 @@ public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
 
 ---
 
-### 6.4 Linked List — Remove Nth Node From End
+#### 6.4 Linked List — Remove Nth Node From End
+
+> **Rung:** F40 · evidence exercise
 
 **Use when:** Remove from end without knowing length
 
@@ -1496,7 +1866,9 @@ public ListNode removeNthFromEnd(ListNode head, int n) {
 
 ---
 
-### 6.5 Linked List — Reorder List
+#### 6.5 Linked List — Reorder List
+
+> **Rung:** F42 · evidence exercise
 
 **Use when:** Reorder L0→Ln→L1→Ln-1→...
 
@@ -1551,7 +1923,9 @@ private ListNode reverse(ListNode head) {
 
 ---
 
-### 6.6 Linked List — LRU Cache
+#### 6.6 Linked List — LRU Cache
+
+> **Rung:** F43 · evidence exercise
 
 **Use when:** Implement LRU cache with O(1) operations
 
@@ -1623,24 +1997,14 @@ class LRUCache {
 - Pointer manipulation order in remove/insert
 - Forgetting to remove from map when evicting
 
-### 📅 CATEGORY 6 — DAILY BREAKDOWN
 
-| Day | Template (5x typing)                   | LeetCode Problems                              | Focus                        |
-| --- | -------------------------------------- | ---------------------------------------------- | ---------------------------- |
-| Mon | 6.1 Reverse                            | LC 206 Reverse Linked List                     | prev/curr/next dance         |
-| Tue | 6.2 Fast/Slow                          | LC 141 Linked List Cycle, LC 142 Cycle II      | Null checks on fast          |
-| Wed | 6.3 Merge Two Lists                    | LC 21 Merge Two Sorted Lists                   | Dummy node pattern           |
-| Thu | 6.4 Remove Nth + 6.5 Reorder (3x each) | LC 19 Remove Nth From End, LC 143 Reorder List | n+1 steps, cut the list      |
-| Fri | 6.6 LRU Cache                          | LC 146 LRU Cache                               | Doubly linked list + HashMap |
-| Sat | **REVIEW**: All templates 1x each      | Redo hardest from each day                     | Consolidation                |
+### Library 7 — TREES
 
 ---
 
-# CATEGORY 7: TREES
+#### 7.1 Tree — DFS Recursive (Preorder/Inorder/Postorder)
 
----
-
-### 7.1 Tree — DFS Recursive (Preorder/Inorder/Postorder)
+> **Rung:** F60 · evidence exercise
 
 **Use when:** Tree traversal, path problems
 
@@ -1674,7 +2038,9 @@ public void postorder(TreeNode root, List<Integer> result) {
 
 ---
 
-### 7.2 Tree — BFS Level Order
+#### 7.2 Tree — BFS Level Order
+
+> **Rung:** F61 · evidence exercise
 
 **Use when:** Level-by-level traversal, minimum depth
 
@@ -1714,7 +2080,9 @@ public List<List<Integer>> levelOrder(TreeNode root) {
 
 ---
 
-### 7.3 Tree — Maximum Depth
+#### 7.3 Tree — Maximum Depth
+
+> **Rung:** F63 · evidence exercise
 
 **Use when:** Find height/depth
 
@@ -1733,7 +2101,9 @@ public int maxDepth(TreeNode root) {
 
 ---
 
-### 7.4 Tree — Same Tree / Symmetric
+#### 7.4 Tree — Same Tree / Symmetric
+
+> **Rung:** F60 · evidence exercise
 
 **Use when:** Compare tree structures
 
@@ -1762,7 +2132,9 @@ private boolean isMirror(TreeNode t1, TreeNode t2) {
 
 ---
 
-### 7.5 Tree — Invert Binary Tree
+#### 7.5 Tree — Invert Binary Tree
+
+> **Rung:** F60 · evidence exercise
 
 **Use when:** Mirror a tree
 
@@ -1782,7 +2154,9 @@ public TreeNode invertTree(TreeNode root) {
 
 ---
 
-### 7.6 Tree — Validate BST
+#### 7.6 Tree — Validate BST
+
+> **Rung:** F62 · evidence exercise
 
 **Use when:** Check if valid BST
 
@@ -1811,7 +2185,9 @@ private boolean validate(TreeNode node, Integer min, Integer max) {
 
 ---
 
-### 7.7 Tree — Lowest Common Ancestor
+#### 7.7 Tree — Lowest Common Ancestor
+
+> **Rung:** F65 · evidence exercise
 
 **Use when:** Find LCA of two nodes
 
@@ -1836,7 +2212,9 @@ public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
 
 ---
 
-### 7.8 Tree — Construct from Preorder/Inorder
+#### 7.8 Tree — Construct from Preorder/Inorder
+
+> **Rung:** F64 · evidence exercise
 
 **Use when:** Build tree from traversals
 
@@ -1874,7 +2252,9 @@ private TreeNode build(int[] preorder, int left, int right) {
 
 ---
 
-### 7.9 Tree — Kth Smallest in BST
+#### 7.9 Tree — Kth Smallest in BST
+
+> **Rung:** F62 · evidence exercise
 
 **Use when:** Find kth element in BST
 
@@ -1908,7 +2288,9 @@ public int kthSmallest(TreeNode root, int k) {
 
 ---
 
-### 7.10 Tree — Serialize/Deserialize
+#### 7.10 Tree — Serialize/Deserialize
+
+> **Rung:** F64 · evidence exercise
 
 **Use when:** Convert tree to/from string
 
@@ -1945,24 +2327,14 @@ private TreeNode deserializeHelper(Queue<String> queue) {
 }
 ```
 
-### 📅 CATEGORY 7 — DAILY BREAKDOWN
 
-| Day | Template (5x typing)                          | LeetCode Problems                                                     | Focus                    |
-| --- | --------------------------------------------- | --------------------------------------------------------------------- | ------------------------ |
-| Mon | 7.1 DFS Traversals + 7.3 Max Depth            | LC 104 Maximum Depth, LC 226 Invert Binary Tree                       | Base case: root == null  |
-| Tue | 7.2 BFS Level Order                           | LC 102 Level Order Traversal, LC 199 Right Side View                  | Capture size before loop |
-| Wed | 7.4 Same Tree + 7.5 Invert + 7.6 Validate BST | LC 100 Same Tree, LC 98 Validate BST                                  | Range narrowing          |
-| Thu | 7.7 LCA + 7.8 Construct                       | LC 236 Lowest Common Ancestor, LC 105 Construct from Preorder/Inorder | inorderMap               |
-| Fri | 7.9 Kth Smallest + 7.10 Serialize             | LC 230 Kth Smallest in BST, LC 297 Serialize/Deserialize              | Iterative inorder        |
-| Sat | **REVIEW**: All templates 1x each             | Redo hardest from each day                                            | Consolidation            |
+### Library 8 — HEAP / PRIORITY QUEUE
 
 ---
 
-# CATEGORY 8: HEAP / PRIORITY QUEUE
+#### 8.1 Heap — Basic Operations
 
----
-
-### 8.1 Heap — Basic Operations
+> **Rung:** F44 · evidence exercise
 
 **Use when:** Need quick access to min/max element
 
@@ -1974,7 +2346,7 @@ PriorityQueue<Integer> minHeap = new PriorityQueue<>();
 PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
 
 // Custom comparator
-PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[0] - b[0]);
+PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> Integer.compare(a[0], b[0])); // [FIXED v1.3]
 
 // Operations
 minHeap.offer(x);    // Add: O(log n)
@@ -1986,7 +2358,9 @@ minHeap.isEmpty();
 
 ---
 
-### 8.2 Heap — Kth Largest Element
+#### 8.2 Heap — Kth Largest Element
+
+> **Rung:** F45 · evidence exercise
 
 **Use when:** Find kth largest/smallest
 
@@ -2010,7 +2384,9 @@ public int findKthLargest(int[] nums, int k) {
 
 ---
 
-### 8.3 Heap — Top K Frequent Elements
+#### 8.3 Heap — Top K Frequent Elements
+
+> **Rung:** F07 + F45 · evidence exercise
 
 **Use when:** Find k most frequent
 
@@ -2022,7 +2398,7 @@ public int[] topKFrequent(int[] nums, int k) {
     }
 
     PriorityQueue<Integer> heap = new PriorityQueue<>(
-        (a, b) -> freq.get(a) - freq.get(b)
+        (a, b) -> Integer.compare(freq.get(a), freq.get(b)) // [FIXED v1.3]
     );
 
     for (int num : freq.keySet()) {
@@ -2042,14 +2418,16 @@ public int[] topKFrequent(int[] nums, int k) {
 
 ---
 
-### 8.4 Heap — Merge K Sorted Lists
+#### 8.4 Heap — Merge K Sorted Lists
+
+> **Rung:** F46 · evidence exercise
 
 **Use when:** Merge multiple sorted sequences
 
 ```java
 public ListNode mergeKLists(ListNode[] lists) {
     PriorityQueue<ListNode> heap = new PriorityQueue<>(
-        (a, b) -> a.val - b.val
+        (a, b) -> Integer.compare(a.val, b.val) // [FIXED v1.3]
     );
 
     // Add first node of each list
@@ -2080,7 +2458,9 @@ public ListNode mergeKLists(ListNode[] lists) {
 
 ---
 
-### 8.5 Heap — Find Median from Data Stream
+#### 8.5 Heap — Find Median from Data Stream
+
+> **Rung:** F47 · evidence exercise
 
 **Use when:** Running median
 
@@ -2107,31 +2487,21 @@ class MedianFinder {
         if (maxHeap.size() > minHeap.size()) {
             return maxHeap.peek();
         }
-        return (maxHeap.peek() + minHeap.peek()) / 2.0;
+        return ((long) maxHeap.peek() + minHeap.peek()) / 2.0; // [FIXED v1.3] widen before adding
     }
 }
 ```
 
 **Invariant:** maxHeap contains smaller half, minHeap contains larger half. Sizes differ by at most 1.
 
-### 📅 CATEGORY 8 — DAILY BREAKDOWN
 
-| Day | Template (5x typing)              | LeetCode Problems                   | Focus                |
-| --- | --------------------------------- | ----------------------------------- | -------------------- |
-| Mon | 8.1 Basic Ops + 8.2 Kth Largest   | LC 215 Kth Largest Element          | Min-heap of size k   |
-| Tue | 8.3 Top K Frequent                | LC 347 Top K Frequent Elements      | Frequency map + heap |
-| Wed | 8.4 Merge K Lists                 | LC 23 Merge K Sorted Lists          | Poll and add next    |
-| Thu | 8.5 Median Finder                 | LC 295 Find Median from Data Stream | Two heaps balanced   |
-| Fri | Review all heap patterns          | LC 973 K Closest Points to Origin   | Custom comparator    |
-| Sat | **REVIEW**: All templates 1x each | Redo hardest from each day          | Consolidation        |
+### Library 9 — BACKTRACKING
 
 ---
 
-# CATEGORY 9: BACKTRACKING
+#### 9.1 Backtracking — Subsets
 
----
-
-### 9.1 Backtracking — Subsets
+> **Rung:** F57 + F80 · evidence exercise
 
 **Use when:** Generate all subsets
 
@@ -2158,7 +2528,9 @@ private void backtrack(int[] nums, int start, List<Integer> current,
 
 ---
 
-### 9.2 Backtracking — Permutations
+#### 9.2 Backtracking — Permutations
+
+> **Rung:** F57 · evidence exercise
 
 **Use when:** Generate all orderings
 
@@ -2193,7 +2565,9 @@ private void backtrack(int[] nums, boolean[] used, List<Integer> current,
 
 ---
 
-### 9.3 Backtracking — Combination Sum
+#### 9.3 Backtracking — Combination Sum
+
+> **Rung:** F57 + F58 + F74 · evidence exercise
 
 **Use when:** Find combinations that sum to target (can reuse)
 
@@ -2222,7 +2596,9 @@ private void backtrack(int[] candidates, int remaining, int start,
 
 ---
 
-### 9.4 Backtracking — Word Search
+#### 9.4 Backtracking — Word Search
+
+> **Rung:** F59 · evidence exercise
 
 **Use when:** Find word in grid
 
@@ -2262,24 +2638,14 @@ private boolean backtrack(char[][] board, String word, int row, int col, int idx
 }
 ```
 
-### 📅 CATEGORY 9 — DAILY BREAKDOWN
 
-| Day | Template (5x typing)              | LeetCode Problems                               | Focus                            |
-| --- | --------------------------------- | ----------------------------------------------- | -------------------------------- |
-| Mon | 9.1 Subsets                       | LC 78 Subsets                                   | start parameter, add before loop |
-| Tue | 9.2 Permutations                  | LC 46 Permutations                              | used[] array, loop from 0        |
-| Wed | 9.3 Combination Sum               | LC 39 Combination Sum, LC 40 Combination Sum II | i vs i+1 for reuse               |
-| Thu | 9.4 Word Search                   | LC 79 Word Search                               | Mark visited with '#'            |
-| Fri | Mixed backtracking                | LC 131 Palindrome Partitioning                  | Combining patterns               |
-| Sat | **REVIEW**: All templates 1x each | Redo hardest from each day                      | Consolidation                    |
+### Library 10 — TRIES
 
 ---
 
-# CATEGORY 10: TRIES
+#### 10.1 Trie — Implementation
 
----
-
-### 10.1 Trie — Implementation
+> **Rung:** F116 · evidence exercise
 
 **Use when:** Prefix matching, autocomplete
 
@@ -2327,11 +2693,33 @@ class Trie {
 
 ---
 
-### 10.2 Trie — Word Search II
+#### 10.2 Trie — Word Search II
+
+> **Rung:** F59 + F116 · evidence exercise
 
 **Use when:** Find multiple words in grid
 
 ```java
+// [FIXED v1.3] v1.2 did not compile: TrieNode had no `word` field and buildTrie was undefined.
+class TrieNode {
+    TrieNode[] children = new TrieNode[26];
+    String word = null;            // terminal marker AND payload
+}
+
+private TrieNode buildTrie(String[] words) {
+    TrieNode root = new TrieNode();
+    for (String w : words) {
+        TrieNode node = root;
+        for (char c : w.toCharArray()) {
+            int idx = c - 'a';
+            if (node.children[idx] == null) node.children[idx] = new TrieNode();
+            node = node.children[idx];
+        }
+        node.word = w;
+    }
+    return root;
+}
+
 public List<String> findWords(char[][] board, String[] words) {
     TrieNode root = buildTrie(words);
     List<String> result = new ArrayList<>();
@@ -2366,24 +2754,14 @@ private void dfs(char[][] board, int i, int j, TrieNode node, List<String> resul
 }
 ```
 
-### 📅 CATEGORY 10 — DAILY BREAKDOWN
 
-| Day | Template (5x typing)              | LeetCode Problems                           | Focus                    |
-| --- | --------------------------------- | ------------------------------------------- | ------------------------ |
-| Mon | 10.1 Trie Implementation          | LC 208 Implement Trie                       | insert/search/startsWith |
-| Tue | 10.1 Trie (continued)             | LC 211 Design Add and Search Words          | Wildcard with '.'        |
-| Wed | 10.2 Word Search II               | LC 212 Word Search II                       | Trie + DFS grid          |
-| Thu | Review Trie patterns              | Practice combining Trie with other patterns | Integration              |
-| Fri | Mixed Trie problems               | Any remaining Trie problems                 | Consolidation            |
-| Sat | **REVIEW**: All templates 1x each | Redo hardest from each day                  | Consolidation            |
+### Library 11 — GRAPHS
 
 ---
 
-# CATEGORY 11: GRAPHS
+#### 11.1 Graph — BFS (Level Order)
 
----
-
-### 11.1 Graph — BFS (Level Order)
+> **Rung:** F85 · evidence exercise
 
 **Use when:** Shortest path (unweighted), level-by-level
 
@@ -2410,7 +2788,9 @@ public void bfs(int start, List<List<Integer>> graph) {
 
 ---
 
-### 11.2 Graph — DFS (Recursive)
+#### 11.2 Graph — DFS (Recursive)
+
+> **Rung:** F85 · evidence exercise
 
 **Use when:** Path finding, connected components
 
@@ -2427,7 +2807,9 @@ public void dfs(int node, boolean[] visited, List<List<Integer>> graph) {
 
 ---
 
-### 11.3 Graph — Number of Islands (Grid DFS)
+#### 11.3 Graph — Number of Islands (Grid DFS)
+
+> **Rung:** F86 + F87 · evidence exercise
 
 **Use when:** Count connected components in grid
 
@@ -2462,7 +2844,9 @@ private void dfs(char[][] grid, int i, int j) {
 
 ---
 
-### 11.4 Graph — Clone Graph
+#### 11.4 Graph — Clone Graph
+
+> **Rung:** F84 + F85 · evidence exercise
 
 **Use when:** Deep copy graph
 
@@ -2492,7 +2876,9 @@ private Node clone(Node node, Map<Node, Node> map) {
 
 ---
 
-### 11.5 Graph — Course Schedule (Cycle Detection)
+#### 11.5 Graph — Course Schedule (Cycle Detection)
+
+> **Rung:** F88 · evidence exercise
 
 **Use when:** Detect cycle in directed graph
 
@@ -2537,7 +2923,9 @@ private boolean hasCycle(List<List<Integer>> graph, int node, int[] state) {
 
 ---
 
-### 11.6 Graph — Topological Sort (Kahn's Algorithm)
+#### 11.6 Graph — Topological Sort (Kahn's Algorithm)
+
+> **Rung:** F88 · evidence exercise
 
 **Use when:** Order dependencies
 
@@ -2579,7 +2967,9 @@ public int[] topologicalSort(int n, int[][] edges) {
 
 ---
 
-### 11.7 Graph — Pacific Atlantic Water Flow
+#### 11.7 Graph — Pacific Atlantic Water Flow
+
+> **Rung:** F90 · evidence exercise
 
 **Use when:** Multiple source BFS/DFS
 
@@ -2624,24 +3014,14 @@ private void dfs(int[][] heights, boolean[][] visited, int i, int j) {
 }
 ```
 
-### 📅 CATEGORY 11 — DAILY BREAKDOWN
 
-| Day | Template (5x typing)              | LeetCode Problems                  | Focus                |
-| --- | --------------------------------- | ---------------------------------- | -------------------- |
-| Mon | 11.1 BFS + 11.2 DFS               | LC 200 Number of Islands           | Grid DFS basics      |
-| Tue | 11.3 Grid DFS + 11.4 Clone Graph  | LC 133 Clone Graph                 | Map for cloning      |
-| Wed | 11.5 Cycle Detection              | LC 207 Course Schedule             | state[] array: 0/1/2 |
-| Thu | 11.6 Topological Sort             | LC 210 Course Schedule II          | Indegree + BFS       |
-| Fri | 11.7 Pacific Atlantic             | LC 417 Pacific Atlantic Water Flow | Multi-source DFS     |
-| Sat | **REVIEW**: All templates 1x each | Redo hardest from each day         | Consolidation        |
+### Library 12 — ADVANCED GRAPHS
 
 ---
 
-# CATEGORY 12: ADVANCED GRAPHS
+#### 12.1 Union-Find (Disjoint Set)
 
----
-
-### 12.1 Union-Find (Disjoint Set)
+> **Rung:** F49 + F96 · evidence exercise
 
 **Use when:** Connected components, cycle detection
 
@@ -2684,18 +3064,22 @@ class UnionFind {
 
 ---
 
-### 12.2 Dijkstra's Algorithm
+#### 12.2 Dijkstra's Algorithm
+
+> **Rung:** F92 · evidence exercise
 
 **Use when:** Shortest path with weighted edges
 
 ```java
+// [FIXED v1.3] CONTRACT: nonnegative edge weights ONLY. Negative edges or a bounded
+// edge count ("at most K stops") require Bellman-Ford (F93) or (node, edgesUsed) state (F95).
 public int[] dijkstra(int n, List<int[]>[] graph, int start) {
     int[] dist = new int[n];
     Arrays.fill(dist, Integer.MAX_VALUE);
     dist[start] = 0;
 
     // Min-heap: [distance, node]
-    PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[0] - b[0]);
+    PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> Integer.compare(a[0], b[0])); // [FIXED v1.3]
     pq.offer(new int[]{0, start});
 
     while (!pq.isEmpty()) {
@@ -2719,24 +3103,14 @@ public int[] dijkstra(int n, List<int[]>[] graph, int start) {
 }
 ```
 
-### 📅 CATEGORY 12 — DAILY BREAKDOWN
 
-| Day | Template (5x typing)              | LeetCode Problems                                    | Focus                   |
-| --- | --------------------------------- | ---------------------------------------------------- | ----------------------- |
-| Mon | 12.1 Union-Find                   | LC 323 Number of Connected Components                | Path compression        |
-| Tue | 12.1 Union-Find (continued)       | LC 261 Graph Valid Tree, LC 684 Redundant Connection | Cycle detection with UF |
-| Wed | 12.2 Dijkstra                     | LC 743 Network Delay Time                            | Skip outdated entries   |
-| Thu | 12.2 Dijkstra (continued)         | LC 787 Cheapest Flights Within K Stops               | Modified Dijkstra       |
-| Fri | Mixed advanced graphs             | Review and practice                                  | Integration             |
-| Sat | **REVIEW**: All templates 1x each | Redo hardest from each day                           | Consolidation           |
+### Library 13 — 1-D DYNAMIC PROGRAMMING
 
 ---
 
-# CATEGORY 13: 1-D DYNAMIC PROGRAMMING
+#### 13.1 DP — Climbing Stairs (Fibonacci)
 
----
-
-### 13.1 DP — Climbing Stairs (Fibonacci)
+> **Rung:** F71 · evidence exercise
 
 **Use when:** Number of ways to reach end
 
@@ -2758,7 +3132,9 @@ public int climbStairs(int n) {
 
 ---
 
-### 13.2 DP — House Robber
+#### 13.2 DP — House Robber
+
+> **Rung:** F71 · evidence exercise
 
 **Use when:** Maximum value with constraints
 
@@ -2782,7 +3158,9 @@ public int rob(int[] nums) {
 
 ---
 
-### 13.3 DP — Coin Change
+#### 13.3 DP — Coin Change
+
+> **Rung:** F74 · evidence exercise
 
 **Use when:** Minimum coins for amount
 
@@ -2806,7 +3184,9 @@ public int coinChange(int[] coins, int amount) {
 
 ---
 
-### 13.4 DP — Longest Increasing Subsequence
+#### 13.4 DP — Longest Increasing Subsequence
+
+> **Rung:** F76 + F77 · evidence exercise
 
 **Use when:** Find LIS length
 
@@ -2831,7 +3211,9 @@ public int lengthOfLIS(int[] nums) {
 
 ---
 
-### 13.5 DP — Word Break
+#### 13.5 DP — Word Break
+
+> **Rung:** F78 · evidence exercise
 
 **Use when:** Can string be segmented
 
@@ -2856,7 +3238,9 @@ public boolean wordBreak(String s, List<String> wordDict) {
 
 ---
 
-### 13.6 DP — Decode Ways
+#### 13.6 DP — Decode Ways
+
+> **Rung:** F71 + F78 · evidence exercise
 
 **Use when:** Count valid decodings
 
@@ -2889,24 +3273,14 @@ public int numDecodings(String s) {
 }
 ```
 
-### 📅 CATEGORY 13 — DAILY BREAKDOWN
 
-| Day | Template (5x typing)                     | LeetCode Problems                          | Focus               |
-| --- | ---------------------------------------- | ------------------------------------------ | ------------------- |
-| Mon | 13.1 Climbing Stairs + 13.2 House Robber | LC 70 Climbing Stairs, LC 198 House Robber | prev1/prev2 pattern |
-| Tue | 13.3 Coin Change                         | LC 322 Coin Change                         | Fill with amount+1  |
-| Wed | 13.4 LIS                                 | LC 300 Longest Increasing Subsequence      | O(n²) solution      |
-| Thu | 13.5 Word Break                          | LC 139 Word Break                          | dp[j] && substring  |
-| Fri | 13.6 Decode Ways                         | LC 91 Decode Ways                          | Single vs two digit |
-| Sat | **REVIEW**: All templates 1x each        | Redo hardest from each day                 | Consolidation       |
+### Library 14 — 2-D DYNAMIC PROGRAMMING
 
 ---
 
-# CATEGORY 14: 2-D DYNAMIC PROGRAMMING
+#### 14.1 DP — Unique Paths
 
----
-
-### 14.1 DP — Unique Paths
+> **Rung:** F72 · evidence exercise
 
 **Use when:** Count paths in grid
 
@@ -2929,7 +3303,9 @@ public int uniquePaths(int m, int n) {
 
 ---
 
-### 14.2 DP — Longest Common Subsequence
+#### 14.2 DP — Longest Common Subsequence
+
+> **Rung:** F78 · evidence exercise
 
 **Use when:** Find LCS of two strings
 
@@ -2954,7 +3330,9 @@ public int longestCommonSubsequence(String text1, String text2) {
 
 ---
 
-### 14.3 DP — Edit Distance
+#### 14.3 DP — Edit Distance
+
+> **Rung:** F78 · evidence exercise
 
 **Use when:** Minimum operations to convert strings
 
@@ -2982,24 +3360,14 @@ public int minDistance(String word1, String word2) {
 }
 ```
 
-### 📅 CATEGORY 14 — DAILY BREAKDOWN
 
-| Day | Template (5x typing)              | LeetCode Problems                         | Focus                 |
-| --- | --------------------------------- | ----------------------------------------- | --------------------- |
-| Mon | 14.1 Unique Paths                 | LC 62 Unique Paths, LC 63 Unique Paths II | Initialize edges to 1 |
-| Tue | 14.2 LCS                          | LC 1143 Longest Common Subsequence        | dp[i-1][j-1] + 1      |
-| Wed | 14.3 Edit Distance                | LC 72 Edit Distance                       | Three operations      |
-| Thu | 2D DP Review                      | LC 516 Longest Palindromic Subsequence    | Combining patterns    |
-| Fri | Mixed 2D DP                       | LC 97 Interleaving String                 | Integration           |
-| Sat | **REVIEW**: All templates 1x each | Redo hardest from each day                | Consolidation         |
+### Library 15 — GREEDY
 
 ---
 
-# CATEGORY 15: GREEDY
+#### 15.1 Greedy — Jump Game
 
----
-
-### 15.1 Greedy — Jump Game
+> **Rung:** F82 · evidence exercise
 
 **Use when:** Can reach end
 
@@ -3018,7 +3386,9 @@ public boolean canJump(int[] nums) {
 
 ---
 
-### 15.2 Greedy — Jump Game II
+#### 15.2 Greedy — Jump Game II
+
+> **Rung:** F82 · evidence exercise
 
 **Use when:** Minimum jumps to reach end
 
@@ -3043,7 +3413,9 @@ public int jump(int[] nums) {
 
 ---
 
-### 15.3 Greedy — Gas Station
+#### 15.3 Greedy — Gas Station
+
+> **Rung:** F82 · evidence exercise
 
 **Use when:** Can complete circuit
 
@@ -3067,30 +3439,20 @@ public int canCompleteCircuit(int[] gas, int[] cost) {
 }
 ```
 
-### 📅 CATEGORY 15 — DAILY BREAKDOWN
 
-| Day | Template (5x typing)              | LeetCode Problems               | Focus               |
-| --- | --------------------------------- | ------------------------------- | ------------------- |
-| Mon | 15.1 Jump Game                    | LC 55 Jump Game                 | maxReach tracking   |
-| Tue | 15.2 Jump Game II                 | LC 45 Jump Game II              | currentEnd/farthest |
-| Wed | 15.3 Gas Station                  | LC 134 Gas Station              | totalTank/currTank  |
-| Thu | Mixed Greedy                      | LC 763 Partition Labels         | Combining patterns  |
-| Fri | Mixed Greedy                      | LC 678 Valid Parenthesis String | Range tracking      |
-| Sat | **REVIEW**: All templates 1x each | Redo hardest from each day      | Consolidation       |
+### Library 16 — INTERVALS
 
 ---
 
-# CATEGORY 16: INTERVALS
+#### 16.1 Intervals — Merge
 
----
-
-### 16.1 Intervals — Merge
+> **Rung:** F36 · evidence exercise
 
 **Use when:** Merge overlapping intervals
 
 ```java
 public int[][] merge(int[][] intervals) {
-    Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
+    Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0])); // [FIXED v1.3]
 
     List<int[]> result = new ArrayList<>();
     int[] current = intervals[0];
@@ -3111,7 +3473,9 @@ public int[][] merge(int[][] intervals) {
 
 ---
 
-### 16.2 Intervals — Insert
+#### 16.2 Intervals — Insert
+
+> **Rung:** F36 · evidence exercise
 
 **Use when:** Insert and merge new interval
 
@@ -3144,13 +3508,15 @@ public int[][] insert(int[][] intervals, int[] newInterval) {
 
 ---
 
-### 16.3 Intervals — Non-overlapping (Remove Min)
+#### 16.3 Intervals — Non-overlapping (Remove Min)
+
+> **Rung:** F35 + F36 · evidence exercise
 
 **Use when:** Maximum non-overlapping intervals
 
 ```java
 public int eraseOverlapIntervals(int[][] intervals) {
-    Arrays.sort(intervals, (a, b) -> a[1] - b[1]); // Sort by end time
+    Arrays.sort(intervals, (a, b) -> Integer.compare(a[1], b[1])); // Sort by end time [FIXED v1.3]
 
     int count = 0;
     int end = Integer.MIN_VALUE;
@@ -3169,7 +3535,9 @@ public int eraseOverlapIntervals(int[][] intervals) {
 
 ---
 
-### 16.4 Intervals — Meeting Rooms II
+#### 16.4 Intervals — Meeting Rooms II
+
+> **Rung:** F37 · evidence exercise
 
 **Use when:** Minimum rooms needed
 
@@ -3200,24 +3568,14 @@ public int minMeetingRooms(int[][] intervals) {
 }
 ```
 
-### 📅 CATEGORY 16 — DAILY BREAKDOWN
 
-| Day | Template (5x typing)              | LeetCode Problems                             | Focus                     |
-| --- | --------------------------------- | --------------------------------------------- | ------------------------- |
-| Mon | 16.1 Merge Intervals              | LC 56 Merge Intervals                         | Sort by start, extend end |
-| Tue | 16.2 Insert Interval              | LC 57 Insert Interval                         | Three phases              |
-| Wed | 16.3 Non-overlapping              | LC 435 Non-overlapping Intervals              | Sort by end time          |
-| Thu | 16.4 Meeting Rooms                | LC 252 Meeting Rooms, LC 253 Meeting Rooms II | Separate start/end arrays |
-| Fri | Mixed Intervals                   | LC 986 Interval List Intersections            | Two pointer on intervals  |
-| Sat | **REVIEW**: All templates 1x each | Redo hardest from each day                    | Consolidation             |
+### Library 17 — MATH & GEOMETRY
 
 ---
 
-# CATEGORY 17: MATH & GEOMETRY
+#### 17.1 Math — Rotate Image
 
----
-
-### 17.1 Math — Rotate Image
+> **Rung:** F38 · evidence exercise
 
 **Use when:** Rotate matrix 90 degrees
 
@@ -3247,7 +3605,9 @@ public void rotate(int[][] matrix) {
 
 ---
 
-### 17.2 Math — Spiral Matrix
+#### 17.2 Math — Spiral Matrix
+
+> **Rung:** F38 · evidence exercise
 
 **Use when:** Traverse matrix in spiral order
 
@@ -3287,7 +3647,9 @@ public List<Integer> spiralOrder(int[][] matrix) {
 
 ---
 
-### 17.3 Math — Set Matrix Zeroes
+#### 17.3 Math — Set Matrix Zeroes
+
+> **Rung:** F38 · evidence exercise
 
 **Use when:** Zero out rows/cols
 
@@ -3325,24 +3687,14 @@ public void setZeroes(int[][] matrix) {
 }
 ```
 
-### 📅 CATEGORY 17 — DAILY BREAKDOWN
 
-| Day | Template (5x typing)              | LeetCode Problems                       | Focus                        |
-| --- | --------------------------------- | --------------------------------------- | ---------------------------- |
-| Mon | 17.1 Rotate Image                 | LC 48 Rotate Image                      | Transpose + reverse          |
-| Tue | 17.2 Spiral Matrix                | LC 54 Spiral Matrix                     | top/bottom/left/right        |
-| Wed | 17.3 Set Matrix Zeroes            | LC 73 Set Matrix Zeroes                 | Use first row/col as markers |
-| Thu | Mixed Math                        | LC 43 Multiply Strings, LC 50 Pow(x, n) | String math, fast exponent   |
-| Fri | Mixed Geometry                    | LC 149 Max Points on a Line             | Slope calculation            |
-| Sat | **REVIEW**: All templates 1x each | Redo hardest from each day              | Consolidation                |
+### Library 18 — BIT MANIPULATION
 
 ---
 
-# CATEGORY 18: BIT MANIPULATION
+#### 18.1 Bit — Single Number
 
----
-
-### 18.1 Bit — Single Number
+> **Rung:** F09 · evidence exercise
 
 **Use when:** Find element appearing once
 
@@ -3360,7 +3712,9 @@ public int singleNumber(int[] nums) {
 
 ---
 
-### 18.2 Bit — Number of 1 Bits
+#### 18.2 Bit — Number of 1 Bits
+
+> **Rung:** F09 · evidence exercise
 
 **Use when:** Count set bits
 
@@ -3387,7 +3741,9 @@ public int hammingWeight2(int n) {
 
 ---
 
-### 18.3 Bit — Counting Bits
+#### 18.3 Bit — Counting Bits
+
+> **Rung:** F09 + F71 · evidence exercise
 
 **Use when:** Count bits for all numbers 0 to n
 
@@ -3407,7 +3763,9 @@ public int[] countBits(int n) {
 
 ---
 
-### 18.4 Bit — Reverse Bits
+#### 18.4 Bit — Reverse Bits
+
+> **Rung:** F09 · evidence exercise
 
 **Use when:** Reverse bit order
 
@@ -3427,7 +3785,9 @@ public int reverseBits(int n) {
 
 ---
 
-### 18.5 Bit — Missing Number
+#### 18.5 Bit — Missing Number
+
+> **Rung:** F09 · evidence exercise
 
 **Use when:** Find missing number in [0, n]
 
@@ -3445,7 +3805,9 @@ public int missingNumber(int[] nums) {
 
 ---
 
-### 18.6 Bit — Sum of Two Integers (No + operator)
+#### 18.6 Bit — Sum of Two Integers (No + operator)
+
+> **Rung:** F09 · evidence exercise
 
 **Use when:** Add without arithmetic operators
 
@@ -3460,308 +3822,7 @@ public int getSum(int a, int b) {
 }
 ```
 
-### 📅 CATEGORY 18 — DAILY BREAKDOWN
-
-| Day | Template (5x typing)                       | LeetCode Problems                             | Focus             |
-| --- | ------------------------------------------ | --------------------------------------------- | ----------------- |
-| Mon | 18.1 Single Number                         | LC 136 Single Number                          | XOR properties    |
-| Tue | 18.2 Number of 1 Bits + 18.3 Counting Bits | LC 191 Number of 1 Bits, LC 338 Counting Bits | n & (n-1) trick   |
-| Wed | 18.4 Reverse Bits                          | LC 190 Reverse Bits                           | Bit by bit        |
-| Thu | 18.5 Missing Number                        | LC 268 Missing Number                         | XOR with indices  |
-| Fri | 18.6 Sum of Two Integers                   | LC 371 Sum of Two Integers                    | Carry propagation |
-| Sat | **REVIEW**: All templates 1x each          | Redo hardest from each day                    | Consolidation     |
-
 ---
 
-## Article V — Daily Protocol
-
-This is the exact structure for every practice session.
-
-### Phase 1 Sessions (Weeks 1-3): Template Building
-
-**Duration:** 90 minutes minimum
-
-| Block          | Time   | Activity                           |
-| -------------- | ------ | ---------------------------------- |
-| Template Drill | 15 min | Type today's template 5x, vocalize |
-| Problem 1      | 25 min | Attempt (no hints until 25 min)    |
-| Immediate Redo | 10 min | Delete. Rewrite from scratch.      |
-| Problem 2      | 25 min | Same pattern                       |
-| Immediate Redo | 10 min | Delete. Rewrite.                   |
-| Error Log      | 5 min  | Document what broke                |
-
-### Phase 2 Sessions (Weeks 4-6): Pattern Mastery
-
-**Duration:** 2 hours
-
-| Block           | Time   | Activity                           |
-| --------------- | ------ | ---------------------------------- |
-| Template Warmup | 10 min | Type current pattern template once |
-| Problem 1       | 25 min | Attempt                            |
-| Immediate Redo  | 10 min | Delete. Rewrite.                   |
-| Problem 2       | 25 min | Same pattern                       |
-| Immediate Redo  | 10 min | Delete. Rewrite.                   |
-| Problem 3       | 25 min | Harder variation                   |
-| Error Log       | 5 min  | Document patterns                  |
-
-### Phase 3 Sessions (Weeks 7-10): Interview Simulation
-
-**Duration:** 2.5 hours
-
-| Block              | Time   | Activity                 |
-| ------------------ | ------ | ------------------------ |
-| Mixed Problem 1    | 45 min | Full simulation          |
-| Immediate Redo     | 15 min | Delete. Rewrite cleaner. |
-| Mixed Problem 2    | 45 min | Different pattern        |
-| Immediate Redo     | 15 min | Delete. Rewrite.         |
-| Error Log + Review | 15 min | Weekly patterns          |
-
----
-
-## Article VI — KPI Tracking
-
-| Metric                  | Week 1   | Week 4   | Week 8   |
-| ----------------------- | -------- | -------- | -------- |
-| Template typing         | < 90 sec | < 60 sec | < 45 sec |
-| Redo time (Medium)      | < 20 min | < 15 min | < 12 min |
-| Syntax errors/problem   | Any      | < 3      | < 1      |
-| First-run acceptance    | 10%      | 40%      | 70%      |
-| Medium solve in ≤25 min | 30%      | 60%      | 80%      |
-
----
-
-## Article VII — Recovery Protocols
-
-### When Stuck (> 25 min)
-
-1. Stop coding
-2. Write invariant in plain English
-3. Write pseudocode as comments
-4. Look at ONE hint (approach only)
-5. Implement yourself
-
-### When Burned Out
-
-1. 24-hour mandatory break
-2. Physical activity
-3. Day 1 back: 30 min only
-4. Day 2: 60 min
-5. Day 3: Normal
-
----
-
-## Article VIII — Weekly Curriculum (NeetCode 150 Order)
-
-### Week 1: Arrays & Hashing
-
-| Day | Focus                  | Problems             |
-| --- | ---------------------- | -------------------- |
-| Mon | HashSet/HashMap basics | LC 217, LC 242, LC 1 |
-| Tue | Frequency counting     | LC 49, LC 347        |
-| Wed | Array manipulation     | LC 238, LC 128       |
-| Thu | Encoding/Decoding      | LC 271               |
-| Fri | Review + Redo          | Redo all from memory |
-
-### Week 2: Two Pointers + Sliding Window
-
-| Day | Focus                   | Problems            |
-| --- | ----------------------- | ------------------- |
-| Mon | Two pointers opposite   | LC 167, LC 15       |
-| Tue | Two pointers same       | LC 11, LC 42        |
-| Wed | Fixed sliding window    | LC 643, LC 567      |
-| Thu | Variable sliding window | LC 3, LC 424, LC 76 |
-| Fri | Review + Redo           | All patterns        |
-
-### Week 3: Stack + Binary Search
-
-| Day | Focus                   | Problems       |
-| --- | ----------------------- | -------------- |
-| Mon | Valid parentheses, RPN  | LC 20, LC 150  |
-| Tue | Monotonic stack         | LC 739, LC 84  |
-| Wed | Binary search standard  | LC 704, LC 33  |
-| Thu | Binary search on answer | LC 875, LC 153 |
-| Fri | Review + Redo           | All patterns   |
-
-### Week 4: Linked List
-
-| Day | Focus              | Problems       |
-| --- | ------------------ | -------------- |
-| Mon | Reverse, merge     | LC 206, LC 21  |
-| Tue | Fast/slow pointers | LC 141, LC 142 |
-| Wed | Remove, reorder    | LC 19, LC 143  |
-| Thu | LRU Cache          | LC 146         |
-| Fri | Review + Redo      | All patterns   |
-
-### Week 5: Trees
-
-| Day | Focus           | Problems               |
-| --- | --------------- | ---------------------- |
-| Mon | DFS basics      | LC 104, LC 226, LC 100 |
-| Tue | BFS level order | LC 102, LC 199         |
-| Wed | BST operations  | LC 98, LC 230          |
-| Thu | LCA, construct  | LC 236, LC 105         |
-| Fri | Review + Redo   | All patterns           |
-
-### Week 6: Heap + Backtracking
-
-| Day | Focus                        | Problems       |
-| --- | ---------------------------- | -------------- |
-| Mon | Heap basics                  | LC 215, LC 347 |
-| Tue | Merge K, median              | LC 23, LC 295  |
-| Wed | Subsets, permutations        | LC 78, LC 46   |
-| Thu | Combination sum, word search | LC 39, LC 79   |
-| Fri | Review + Redo                | All patterns   |
-
-### Week 7: Graphs + Tries
-
-| Day | Focus               | Problems       |
-| --- | ------------------- | -------------- |
-| Mon | BFS/DFS graphs      | LC 200, LC 133 |
-| Tue | Course schedule     | LC 207, LC 210 |
-| Wed | Union-Find          | LC 323, LC 261 |
-| Thu | Trie implementation | LC 208, LC 211 |
-| Fri | Review + Redo       | All patterns   |
-
-### Week 8: Dynamic Programming
-
-| Day | Focus           | Problems              |
-| --- | --------------- | --------------------- |
-| Mon | 1D DP basics    | LC 70, LC 198, LC 322 |
-| Tue | 1D DP continued | LC 300, LC 139        |
-| Wed | 2D DP           | LC 62, LC 1143        |
-| Thu | Edit distance   | LC 72                 |
-| Fri | Review + Redo   | All patterns          |
-
-### Weeks 9-10: Mixed + Greedy + Intervals + Math + Bits
-
-| Day     | Focus                                            |
-| ------- | ------------------------------------------------ |
-| Mon     | Greedy (LC 55, LC 45) + Intervals (LC 56, LC 57) |
-| Tue     | More intervals (LC 435, LC 253)                  |
-| Wed     | Math/Matrix (LC 48, LC 54, LC 73)                |
-| Thu     | Bit manipulation (LC 136, LC 191, LC 338)        |
-| Fri-Sun | Mock interviews, random mediums                  |
-
----
-
-## Appendix A — Java Quick Reference
-
-```java
-// HashMap
-Map<K, V> map = new HashMap<>();
-map.put(key, value);
-map.get(key);
-map.getOrDefault(key, defaultValue);
-map.containsKey(key);
-map.keySet();
-map.values();
-map.entrySet();
-
-// HashSet
-Set<T> set = new HashSet<>();
-set.add(x);
-set.contains(x);
-set.remove(x);
-
-// ArrayList
-List<T> list = new ArrayList<>();
-list.add(x);
-list.get(i);
-list.set(i, x);
-list.remove(list.size() - 1);
-
-// Queue (BFS)
-Queue<T> queue = new ArrayDeque<>();
-queue.offer(x);
-queue.poll();
-queue.peek();
-queue.isEmpty();
-
-// Stack (DFS)
-Deque<T> stack = new ArrayDeque<>();
-stack.push(x);
-stack.pop();
-stack.peek();
-stack.isEmpty();
-
-// PriorityQueue (Heap)
-PriorityQueue<Integer> minHeap = new PriorityQueue<>();
-PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
-PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[0] - b[0]);
-pq.offer(x);
-pq.poll();
-pq.peek();
-
-// Arrays
-Arrays.sort(arr);
-Arrays.sort(arr, (a, b) -> a[0] - b[0]);
-Arrays.fill(arr, value);
-Arrays.equals(arr1, arr2);
-
-// String
-s.length();
-s.charAt(i);
-s.substring(start, end);
-s.toCharArray();
-s.split(",");
-
-// StringBuilder
-StringBuilder sb = new StringBuilder();
-sb.append(x);
-sb.toString();
-sb.deleteCharAt(sb.length() - 1);
-
-// Math
-Math.max(a, b);
-Math.min(a, b);
-Math.abs(x);
-Integer.MAX_VALUE;
-Integer.MIN_VALUE;
-
-// Bit operations
-a & b;   // AND
-a | b;   // OR
-a ^ b;   // XOR
-~a;      // NOT
-a << 1;  // Left shift (multiply by 2)
-a >> 1;  // Right shift (divide by 2)
-a >>> 1; // Unsigned right shift
-n & (n - 1); // Remove lowest set bit
-```
-
----
-
-## Appendix B — Pattern Recognition Cheat Sheet
-
-| Keywords                                | Pattern                 |
-| --------------------------------------- | ----------------------- |
-| "contains duplicate", "seen before"     | HashSet                 |
-| "frequency", "count", "anagram"         | HashMap                 |
-| "sorted array", "pair sum"              | Two Pointers            |
-| "subarray", "substring", "window"       | Sliding Window          |
-| "matching brackets", "valid expression" | Stack                   |
-| "next greater/smaller"                  | Monotonic Stack         |
-| "sorted", "find position"               | Binary Search           |
-| "minimize maximum", "maximize minimum"  | Binary Search on Answer |
-| "reverse list", "cycle"                 | Linked List             |
-| "tree traversal", "depth"               | DFS/BFS                 |
-| "kth largest/smallest"                  | Heap                    |
-| "all subsets/permutations"              | Backtracking            |
-| "prefix matching"                       | Trie                    |
-| "shortest path unweighted"              | BFS                     |
-| "connected components"                  | DFS/Union-Find          |
-| "course schedule", "dependencies"       | Topological Sort        |
-| "shortest path weighted"                | Dijkstra                |
-| "maximum/minimum value", "count ways"   | DP                      |
-| "can reach end"                         | Greedy                  |
-| "overlapping intervals"                 | Sort + Merge            |
-| "rotate/spiral matrix"                  | Math/Geometry           |
-| "single number", "XOR"                  | Bit Manipulation        |
-
----
-
-_End of Constitution v1.2_
-
-_Structure: NeetCode 150 roadmap_
-_Templates: 75+ covering all 18 categories_
-_Execute relentlessly._
+_Constitution v1.3 — technique-first ladder. 139 rungs (F00–F126 core, X01–X12 frontier). No calendar, no clock, no deadline._
+_Built by adversarial convergence between Claude (Fable) and Codex, each auditing blind before merging._
