@@ -5,12 +5,13 @@
 **Open gates:** model, applicability, derivation, cold_java, bounds, verification, transfer, reconstruction
 **Capability receipts earned:** none yet
 
-> Constitution Rule 6: minimum 2 lines per session — what broke, and why. Unnamed bugs repeat forever. The coach reads the Position line at session start and updates it at session end.
+> Constitution Rule 11: minimum 2 lines per session — what broke, and why. Unnamed bugs repeat forever.
+> The operator dictates the reflective content; the coach writes the procedural block above (rung, gates, receipts) at session start and end.
 
 Format:
 
 ```
-## YYYY-MM-DD — <pattern> (LC <numbers>)
+## <session> — rung <Fxx>, gate worked: <gate name>
 - What broke:
 - Root cause / fix:
 ```
