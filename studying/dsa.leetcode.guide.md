@@ -17,7 +17,7 @@ v1.2 was a NeetCode-150 wrapper: eighteen categories, eighteen Monday-to-Saturda
 2. **Most of the field was missing.** No number theory, no modular arithmetic, no range-query structures, no computational geometry, no string algorithms beyond a basic trie, no flow or matching, no 0/1 knapsack, no correctness-proof technique, and — most importantly — no method for inferring which techniques are even possible from the input constraints.
 3. **The calendar was fiction.** Eighteen category schedules needed 108 program-days against 60 available; the weekly curriculum silently dropped 31 problems to make it fit, while claiming full coverage.
 
-v1.3 replaces all of it with one ladder of **150 rungs** — 138 core (F00–F126 plus grafted/split IDs) and 12 named frontier (X01–X12). There is no calendar, no week, no day, no hour, and no deadline anywhere in this document.
+v1.3 replaces all of it with one ladder of **152 rungs** — 138 core (F00–F126 plus grafted/split suffix IDs) and 14 named frontier (X01–X12, X07 split three ways). There is no calendar, no week, no day, no hour, and no deadline anywhere in this document.
 
 ---
 
@@ -333,7 +333,9 @@ These do not block F126. Pull one in only when a demonstrated target needs it.
 - **X04 — Small-to-large merging and centroid decomposition** *(B)*. **Prereq:** F13, F48, F100, F102.
 - **X05 — Min-cost flow and advanced matching** *(B)*. **Prereq:** F92, F105, F106, F109.
 - **X06 — Suffix automata** *(A)*. **Prereq:** F120, F121.
-- **X07 — Advanced DP optimizations** *(C)* (monotone deque, divide-and-conquer, Knuth, convex hull, Li Chao). **Prereq:** F34, F48, F79, F80, F109.
+- **X07a — Monotone-deque and divide-and-conquer DP optimization** *(B)*. **Prereq:** F34, F79, F80.
+- **X07b — Knuth optimization** *(B)*. Requires the quadrangle-inequality precondition to be proved, not assumed. **Prereq:** X07a.
+- **X07c — Convex-hull trick and Li Chao trees** *(B)*. Introduces line-container machinery no earlier rung supplies. **Prereq:** F48, X07a.
 - **X08 — Advanced computational geometry** *(C)*. **Prereq:** F37, F48, F123.
 - **X09 — FFT/NTT and polynomial algorithms** *(B)*. **Prereq:** F13, F109, F111.
 - **X10 — Advanced randomized/offline techniques** *(C)*. **Prereq:** F05, F14, F24, F54.
@@ -385,7 +387,7 @@ Progress is reported as exactly four things: **capability receipts earned**, **r
 ### State record
 
 ```text
-current_rung:      Fxx — name
+rung_id:           Fxx | Fxxa | Xxx — name
 payload_class:     A | B | C
 prerequisites:     passed | repair-needed (name which)
 open_gates:        [model, applicability, derivation, cold_java, bounds, verification, transfer, reconstruction]
@@ -679,7 +681,9 @@ public List<List<String>> groupAnagrams(String[] strs) {
 
 > **Rung:** F16 · evidence exercise
 
-**Use when:** Calculate something for each element based on rest of array
+**Use when:** Calculate something for each element based on rest of array.
+
+**PRECONDITION [v1.3]:** every prefix/suffix product must fit in signed 32-bit `int`. `[46341, 46341, 46341]` already overflows (returns -2147479015). If the domain does not guarantee this, use `long[]` accumulators and return type.
 
 ```java
 public int[] productExceptSelf(int[] nums) {
@@ -777,7 +781,7 @@ public int longestConsecutive(int[] nums) {
 
     for (int num : set) {
         // Only start counting if this is the START of a sequence
-        if (!set.contains(num - 1)) {
+        if (num == Integer.MIN_VALUE || !set.contains(num - 1)) { // [FIXED v1.3] MIN-1 wraps to MAX
             int length = 1;
             int current = num;
 
@@ -1025,15 +1029,15 @@ public int trap(int[] height) {
 **Use when:** Maximum sum of k elements, any fixed-width window
 
 ```java
-public int maxSumFixedWindow(int[] nums, int k) {
+public long maxSumFixedWindow(int[] nums, int k) { // [FIXED v1.3] long: window sums exceed int
     if (nums == null || k < 1 || nums.length < k)
         throw new IllegalArgumentException("[v1.3 contract] require 1 <= k <= nums.length");
     // Build initial window
-    int windowSum = 0;
+    long windowSum = 0;
     for (int i = 0; i < k; i++) {
         windowSum += nums[i];
     }
-    int maxSum = windowSum;
+    long maxSum = windowSum;
 
     // Slide window
     for (int i = k; i < nums.length; i++) {
@@ -1058,12 +1062,14 @@ public int maxSumFixedWindow(int[] nums, int k) {
 
 > **Rung:** F29 · evidence exercise
 
-**Use when:** Minimum subarray with condition. **PRECONDITION [v1.3]:** all elements nonnegative — the shrink step assumes removing a left element cannot increase the sum. With negatives (e.g. target 3 on `[2,-1,2,1]`) this returns 3 instead of 2; use prefix sums + a map (F17/F08) instead.
+**Use when:** Minimum subarray with condition.
+
+**PRECONDITION [v1.3]:** `nums != null`, **`target > 0`**, and all elements **nonnegative**. The shrink step assumes removing a left element cannot increase the sum. Violations: `target=0, nums=[1]` throws (the shrink loop stays true after emptying the window); `target=3, nums=[2,-1,2,1]` returns 3 when the answer is 2. For **arbitrary signed integers**, this window does not apply at all — use prefix sums plus a **monotonic deque** (F17 + F34), not a hash map.
 
 ```java
 public int minSubArrayLen(int target, int[] nums) {
     int left = 0;
-    int sum = 0;
+    long sum = 0; // [FIXED v1.3] int sum wraps near MAX_VALUE targets
     int minLen = Integer.MAX_VALUE;
 
     for (int right = 0; right < nums.length; right++) {
@@ -1644,7 +1650,7 @@ public int searchRotated(int[] nums, int target) {
 
 > **Rung:** F23 · evidence exercise
 
-**Use when:** Find pivot point in rotated array. **PRECONDITION [v1.3]:** distinct elements — `[1,1,1,0,1]` returns 1, not 0.
+**Use when:** Find pivot point in rotated array. **PRECONDITION [v1.3]:** non-null, **nonempty**, rotated-sorted, **distinct** elements. `findMin(new int[0])` throws; `[1,1,1,0,1]` returns 1, not 0.
 
 ```java
 public int findMin(int[] nums) {
@@ -3466,8 +3472,13 @@ public int canCompleteCircuit(int[] gas, int[] cost) {
 **Use when:** Merge overlapping intervals
 
 ```java
+// PRECONDITION [v1.3]: every row is non-null and has exactly two endpoints with start <= end.
+// merge(new int[][]{new int[0]}) would otherwise return [[]].
 public int[][] merge(int[][] intervals) {
-    if (intervals == null || intervals.length == 0) return new int[0][]; // [FIXED v1.3]
+    if (intervals == null || intervals.length == 0) return new int[0][];
+    for (int[] iv : intervals)
+        if (iv == null || iv.length != 2 || iv[0] > iv[1])
+            throw new IllegalArgumentException("[v1.3 contract] each interval must be {start, end} with start <= end");
     Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0])); // [FIXED v1.3]
 
     List<int[]> result = new ArrayList<>();
@@ -3670,8 +3681,12 @@ public List<Integer> spiralOrder(int[][] matrix) {
 **Use when:** Zero out rows/cols
 
 ```java
+// PRECONDITION [v1.3]: rectangular matrix, every row non-null with equal length.
 public void setZeroes(int[][] matrix) {
-    if (matrix == null || matrix.length == 0 || matrix[0].length == 0) return; // [FIXED v1.3]
+    if (matrix == null || matrix.length == 0 || matrix[0] == null || matrix[0].length == 0) return;
+    for (int[] row : matrix)
+        if (row == null || row.length != matrix[0].length)
+            throw new IllegalArgumentException("[v1.3 contract] matrix must be rectangular");
     int m = matrix.length, n = matrix[0].length;
     boolean firstRowZero = false, firstColZero = false;
 
@@ -3841,6 +3856,6 @@ public int getSum(int a, int b) {
 
 ---
 
-_Constitution v1.3 — technique-first ladder. 150 rungs: 138 core (F00–F126 plus 11 grafted/split suffix IDs) and 12 named frontier (X01–X12). No calendar, no clock, no deadline._
+_Constitution v1.3 — technique-first ladder. 152 rungs: 138 core and 14 named frontier. No calendar, no clock, no deadline._
 _Built by adversarial convergence between Claude (Fable) and Codex, each auditing blind before merging._
-_Release note: v1.3 is the commit range `25f345a..HEAD` — the guide, both coach mirrors, and the initial rung/gate state together. No single commit is the release._
+_Release: the immutable git tag **`v1.3`**. That tagged commit is a full-tree snapshot containing the guide, both coach mirrors, the rung/gate state, and the science disclaimer. The change series that produced it is `25f345a^..v1.3` (inclusive)._
